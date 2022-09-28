@@ -1,0 +1,567 @@
+{
+	"meta": {
+		"template": "default",
+		"version": "1.0",
+		"filename": "test"
+	},
+	"settings": {
+		"discordChannelId": "",
+		"characterisicXp" : {
+			"bias": 0,
+			"multiplier": 10
+		},
+		"skillRankXp": {
+			"career": {
+				"bias": 0,
+				"multiplier": 5
+			},
+			"default": {
+				"bias": 5,
+				"multiplier": 5
+			}
+		},
+		"specializationXP":{
+			"career": {
+				"bias": 0,
+				"multiplier": 10
+			},
+			"default": {
+				"bias": 10,
+				"multiplier": 10
+			}
+		},
+		"encumberanceMode": "max"
+	},
+	"base": {
+		"image":"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
+		"name": "test",
+		"playerName": "test",
+		"species": "test",
+		"gender": "test",
+		"height": "test",
+		"hair": "test",
+		"eyes": "test",
+		"age": "test",
+		"build": "test",
+		"notableFeatures": "test",
+		"career": "test",
+		"specializations": [
+			{
+				"name": "test",
+				"career": "test"
+			}
+		]
+	},
+	"stats": {
+		"wounds" : {
+			"base":0,
+			"threshold": 0,
+			"current": 0
+		},
+		"strain" : {
+			"base":0,
+			"threshold": 0,
+			"current": 0
+		},
+		"soak": {
+			"base": 0,
+			"value": 0
+		},
+		"defense" : {
+			"ranged": {
+				"base": 0,
+				"value": 0
+			},
+			"melee": {
+				"base": 0,
+				"value": 0
+			}
+		},
+		"forcePool": {
+			"base":0,
+			"available": 0,
+			"committed":0
+		},
+		"encumberance": {
+			"base":0,
+			"threshold":0,
+			"currentBase": 0,
+			"current": 0
+		},
+		"criticalInjuries": [
+			{
+				"name": "test",
+				"description": "test"
+			}
+		],
+		"statusEffects":[
+			{"name":"Staggered", "active": false},
+			{"name":"Immobilized", "active": false},
+			{"name":"Disoriented", "active": false}
+		]
+	},
+	"xp": {
+		"value": 0
+	},
+	"characteristics": {
+		"brawn": {
+			"name": "Brawn",
+			"nickname": "Br",
+			"baseRank":0,
+			"rank": 0
+		},
+		"agility": {
+			"name":"Agility",
+			"nickname": "Ag",
+			"baseRank":0,
+			"rank": 0
+		},
+		"intellect": {
+			"name":"Intellect",
+			"nickname": "Int",
+			"baseRank":0,
+			"rank": 0
+		},
+		"cunning": {
+			"name":"Cunning",
+			"nickname": "Cun",
+			"baseRank":0,
+			"rank": 0
+		},
+		"willpower": {
+			"name":"Willpower",
+			"nickname": "Will",
+			"baseRank":0,
+			"rank": 0
+		},
+		"presence": {
+			"name":"Presence",
+			"nickname": "Pr",
+			"baseRank":0,
+			"rank": 0
+		},
+		"forceRank": {
+			"name":"Force Rank",
+			"nickname": "Fr",
+			"baseRank":0,
+			"rank": 0
+		}
+	},
+	"skills": [
+		{
+			"name": "Astrogation",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Athletics",
+			"career": false,
+			"rank": 0,
+			"characteristic": "brawn"
+		},
+		{
+			"name": "Charm",
+			"career": false,
+			"rank": 0,
+			"characteristic": "presence"
+		},
+		{
+			"name": "Coercion",
+			"career": false,
+			"rank": 0,
+			"characteristic": "willpower"
+		},
+		{
+			"name": "Computers",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Cool",
+			"career": false,
+			"rank": 0,
+			"characteristic": "presence"
+		},
+		{
+			"name": "Coordination",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Deception",
+			"career": false,
+			"rank": 0,
+			"characteristic": "cunning"
+		},
+		{
+			"name": "Discipline",
+			"career": false,
+			"rank": 0,
+			"characteristic": "willpower"
+		},
+		{
+			"name": "Leadership",
+			"career": false,
+			"rank": 0,
+			"characteristic": "presence"
+		},
+		{
+			"name": "Mechanics",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Medicine",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Negotiation",
+			"career": false,
+			"rank": 0,
+			"characteristic": "presence"
+		},
+		{
+			"name": "Perception",
+			"career": false,
+			"rank": 0,
+			"characteristic": "cunning"
+		},
+		{
+			"name": "Piloting Planetary",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Piloting Space",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Resilience",
+			"career": false,
+			"rank": 0,
+			"characteristic": "brawn"
+		},
+		{
+			"name": "Skulduggery",
+			"career": false,
+			"rank": 0,
+			"characteristic": "cunning"
+		},
+		{
+			"name": "Stealth",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Streetwise",
+			"career": false,
+			"rank": 0,
+			"characteristic": "cunning"
+		},
+		{
+			"name": "Survival",
+			"career": false,
+			"rank": 0,
+			"characteristic": "cunning"
+		},
+		{
+			"name": "Vigilance",
+			"career": false,
+			"rank": 0,
+			"characteristic": "willpower"
+		},
+		{
+			"name": "Brawl",
+			"career": false,
+			"rank": 0,
+			"characteristic": "brawn"
+		},
+		{
+			"name": "Lightsaber",
+			"career": false,
+			"rank": 0,
+			"characteristic": "brawn"
+		},
+		{
+			"name": "Melee",
+			"career": false,
+			"rank": 0,
+			"characteristic": "brawn"
+		},
+		{
+			"name": "Gunnery",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Ranged Light",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Ranged Heavy",
+			"career": false,
+			"rank": 0,
+			"characteristic": "agility"
+		},
+		{
+			"name": "Core Worlds",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Education",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Lore",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Outer Rim",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Underworld",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Warfare",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		},
+		{
+			"name": "Xenology",
+			"career": false,
+			"rank": 0,
+			"characteristic": "intellect"
+		}
+	],
+	"talents": [
+		{
+			"name": "test",
+			"ranks": 1,
+			"description": "test",
+			"specialization": "test",
+			"cost":0
+		}
+	],
+	"forcePowers": [
+		{
+			"name": "test",
+			"ranks": 0,
+			"description": "test",
+			"cost": 0
+		}
+	],
+	"character": {
+		"motivations": [
+			{
+				"type": "test",
+				"description": "test"
+			}
+		],
+		"morality": 50,
+		"conflict": 50,
+		"emotionalWeakness": "",
+		"emotionalStrength": "",
+		"dutys": [
+			{
+				"type": "",
+				"description": "",
+				"value": 0
+			}
+		],
+		"obligations": [
+			{
+				"type": "",
+				"description": "",
+				"value": 0
+			}
+		]
+	},
+	"armor": [
+		{
+			"name": "default",
+			"soak": 0,
+			"defense": {
+				"melee": 0,
+				"ranged":0
+			},
+			"encumberance": 0,
+			"hardPoints": 0,
+			"type": "test",
+			"make": "test",
+			"special": "test",
+			"condition": 0,
+			"cost": 0,
+			"attachments": [
+				{
+					"name": "test",
+					"hardPointReq": 0,
+					"cost": 0,
+					"baseModifiers": [
+						{
+							"name": "",
+							"description": ""
+						}
+					],
+					"modifications": [
+						{
+							"name": "",
+							"description" : "",
+							"cost":0
+						}
+					]
+				}
+			]
+		}
+	],
+	"weapons": [
+		{
+			"name": "test",
+			"type": "test",
+			"make": "test",
+			"special": "test",
+			"skill": "test",
+			"damage": 0,
+			"crit": 0,
+			"encumberance": 0,
+			"hardPoints": 0,
+			"range": 0,
+			"cost": 0,
+			"condition": 0,
+			"attachments": [
+				{
+					"name": "test",
+					"hardPointReq": 0,
+					"cost": 0,
+					"baseModifiers": [
+						{
+							"name": "",
+							"description": ""
+						}
+					],
+					"modifications": [
+						{
+							"name": "",
+							"description" : "",
+							"cost":0
+						}
+					]
+				}
+			]
+		}
+	],
+	"cybernetics": {
+		"eyes": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"head": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"chest": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"torso": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"arm": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"hand": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"upperLeg": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		},
+		"lowerLeg": {
+			"make": "test",
+			"bonus": "test",
+			"functional": false,
+			"cost": 0
+		}
+	},
+	"finances": {
+		"credits": 0,
+		"owed": [
+			{
+				"amount" : 0,
+				"debtor": "test",
+				"reason": "test",
+				"paid": false
+			}
+		],
+		"debt": [
+			{
+				"amount" : 0,
+				"creditor": "test",
+				"reason": "test",
+				"paid": false
+			}
+		]
+	},
+	"property": {
+		"gear": [
+			{
+				"name": "test",
+				"quantity": 0,
+				"costPerQuantity": 0,
+				"encumberance": 0
+			}
+		],
+		"other": [
+			{
+				"name": "test",
+				"quantity": 0,
+				"costPerQuantity": 0,
+				"encumberance": 0,
+				"location": "test"
+			}
+		]
+	},
+	"notes": "test"
+}

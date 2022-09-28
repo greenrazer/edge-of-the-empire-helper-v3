@@ -1,0 +1,101 @@
+@font-face {
+	font-family: "CustomFont";
+	src: url("IconFonts.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.mf {
+	display: inline-block;
+	font: normal normal normal 14px/1 CustomFont;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+}
+
+.mf-dice:before {
+	content:"\ef73"
+}
+
+.mf-gear:before {
+	content:"\ef74"
+}
+
+.mf-download:before {
+	content:"\ef75"
+}
+
+.mf-upload:before {
+	content:"\ef76"
+}
+
+.mf-plus:before {
+	content:"\ef77"
+}
+
+.mf-save:before {
+	content:"\ef78"
+}
+
+.mf-success:before {
+	content:"\ef79"
+}
+
+.mf-advantage:before {
+	content:"\ef7a"
+}
+
+.mf-disadvantage:before {
+	content:"\ef7b"
+}
+
+.mf-failure:before {
+	content:"\ef7c"
+}
+
+.mf-triumph:before {
+	content:"\ef7d"
+}
+
+.mf-dispair:before {
+	content:"\ef7e"
+}
+
+.mf-light-pip:before {
+	content:"\ef7f"
+}
+
+.mf-dark-pip:before {
+	content:"\ef80"
+}
+
+.mf-ban:before {
+	content:"\ef81"
+}
+
+.mf-pentagon:before {
+	content:"\ef82"
+}
+
+.mf-pentagon-o:before {
+	content:"\ef83"
+}
+
+.mf-square:before {
+	content:"\ef84"
+}
+
+.mf-square-o:before {
+	content:"\ef85"
+}
+
+.mf-triangle:before {
+	content:"\ef86"
+}
+
+.mf-triangle-o:before {
+	content:"\ef87"
+}
+

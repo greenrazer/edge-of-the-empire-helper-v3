@@ -1,0 +1,419 @@
+/* yellow: #bba775 
+   text background:#f0f4fe
+   text: #623d1f
+   green: #4f6851
+   red: #830117
+   red-lite: #c79896
+   background: #e6e7e2
+   selected: #4c595e
+*/
+
+body {
+  margin: 0;
+  background-color: #e6e7e2;
+  overflow: hidden;
+}
+
+#left {
+  height: 100vh;
+  width: 25%;
+  float: left;
+}
+
+#right {
+  height: 100vh;
+  width: 74%;
+  float: left;
+}
+
+#character-selector-holder {
+  height: calc(100% - 20px);
+  padding: 10px;
+}
+
+#character-selector-holder-inner {
+  border: solid;
+  margin: 10px;
+  height: 95%;
+  overflow-y: scroll;
+}
+
+.character-selector {
+  overflow-y: auto;
+  border: solid 5px black;
+  background-color: #f0f4fe;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.character-selector-top {
+  display: block;
+  overflow-y: auto;
+}
+
+.character-selector-image {
+  float: left;
+  width: 25%;
+  position: relative;
+}
+
+.character-selector-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.character-selector-image:hover::after {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.character-selector-image img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+
+#main-content {
+  width: 100%;
+  height: 94%;
+  margin: 10px;
+}
+
+#main-content-top-bar {
+  background-color: #bba775;
+}
+
+#pane-selector {
+  background-color: #c79896;
+}
+
+.pane-selector-elem {
+  display: inline-block;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+
+.pane-selector-elem:hover {
+  background-color: #4c595e;
+}
+
+.pane-selector-active {
+  background-color: #830117;
+}
+
+.right {
+  width: 50%;
+  float:left;
+}
+
+.left {
+  width: 50%;
+  float: left;
+}
+
+.margin-sides {
+  margin: 0px 10px
+}
+
+.array-box-row {
+  border: solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #d4d8e0;
+}
+
+.array-box-row input {
+  width: 100%;
+}
+
+.array-box-inner {
+  border: solid black;
+  padding: 10px;
+}
+
+.pane {
+  width: 100%;
+  height: 95%;
+  overflow-y: scroll;
+}
+
+#base-stats-pane input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f0f4fe;
+}
+
+#base-stats-pane label {
+  font-size: 0.8em;
+  display: block;
+}
+
+#talents-specializations-pane input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f0f4fe;
+}
+
+#character-pane input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f0f4fe;
+}
+
+input[type=range]{
+  appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+
+.double-positive-integer {
+  padding: 10px;
+}
+
+.double-positive-integer-input-name {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.double-positive-integer-input {
+  width: calc(50% - 20px);
+  display: inline-block;
+  height: 4em;
+  padding: 10px;
+}
+
+.double-positive-integer-input input {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  font-size: 4em;
+  color:#623d1f;
+  background-color: #f0f4fe;
+}
+
+.width-75-percent-float-left {
+  width: 75%;
+  float: left;
+  position: relative;
+}
+
+.width-25-percent-float-left {
+  width: 25%;
+  float: left;
+  position: relative;
+}
+
+.width-33-percent-float-left {
+  width: 33%;
+  float: left;
+  position: relative;
+}
+
+.width-45-percent {
+  width: 45%;
+}
+
+.width-40-percent {
+  width: 40%;
+}
+
+#career-selector-button {
+  position: absolute;
+  top: 5px;
+  transform: translate(50%, 50%);
+}
+
+
+.single-positive-integer-input-name {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.single-positive-integer-input {
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+.single-positive-integer-input input{
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  font-size: 4em;
+  color:#623d1f;
+  background-color: #f0f4fe;
+}
+
+#characteristics-part .single-positive-integer-input input:first-of-type {
+  width: 25px;
+  height: 25px;
+  font-size: 1em;
+}
+
+#characteristics-part .single-positive-integer-input input {
+  border: double black 5px;
+  border-radius: 100%;
+}
+
+.col-6-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  width: 99%;
+}
+
+.col-7-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 10px;
+  width: 99%;
+}
+
+.col-12-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+  width: 99%;
+}
+
+.col-3-grid-last-button{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) 0.2fr;
+  grid-gap: 10px;
+}
+
+.col-4-grid-last-button{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 0.2fr;
+  grid-gap: 10px;
+}
+
+.col-5-grid-last-button{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.2fr;
+  grid-gap: 10px;
+}
+
+.col-6-grid-last-button{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 0.2fr;
+  grid-gap: 10px;
+}
+
+.col-7-grid-last-two-button{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 0.2fr 0.2fr;
+  grid-gap: 10px;
+}
+
+
+.span-col-twelve-grid-twelfth {
+  grid-column: span 1;
+}
+
+.span-col-twelve-grid-sixth {
+  grid-column: span 2;
+}
+
+.span-col-twelve-grid-fourth {
+  grid-column: span 3;
+}
+
+.span-col-twelve-grid-third {
+  grid-column: span 4;
+}
+
+.span-col-twelve-grid-half {
+  grid-column: span 6;
+}
+
+.span-col-twelve-grid-two-thirds {
+  grid-column: span 6;
+}
+
+.span-col-twelve-grid-three-fourths {
+  grid-column: span 6;
+}
+
+
+.span-col-twelve-grid-whole {
+  grid-column: span 12;
+}
+
+.cybernetics-grid {
+  display: grid; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 2.5fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr; 
+  gap: 5px 5px; 
+  grid-template-areas: 
+    ". cybernetics-center-image ."
+    ". cybernetics-center-image ."
+    ". cybernetics-center-image ."
+    ". cybernetics-center-image ."; 
+}
+.cybernetics-center-image { grid-area: cybernetics-center-image; }
+
+#notes {
+  width: 99%;
+  height: 96%;
+}
+
+.on-top {
+  position: fixed;
+  z-index: 1;
+  top:0;
+  left: 0;
+}
+
+.full-screen-semi-transparent-background {
+  position:fixed;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.5;
+}
+
+.fixed-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#top-level-box {
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  padding: 50px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.header-text {
+  font-size: xx-large;
+}
+
+.credits-xp-input-value{
+  max-width: 50px;
+  height: 11px;
+}
