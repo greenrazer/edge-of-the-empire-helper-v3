@@ -27,11 +27,11 @@
     "forge": {
       "packagerConfig": {
         "ignore": [
-          "^\/build_scripts",
-          "^\/old",
-          "^\/saved_characters",
-          "^\/.vscode",
-          "^\/.gitignore"
+          "^/build_scripts",
+          "^/old",
+          "^/saved_characters",
+          "^/.vscode",
+          "^/.gitignore"
         ],
         "icon": "./images/EOTEAppIcon.icns"
       },

@@ -1,4 +1,6 @@
+
 const {app, protocol, BrowserWindow, ipcMain, dialog} = require('electron')
+const installing = require('electron-squirrel-startup');
 const path = require('path')
 const fs = require('fs');
 const APP_ROOT_PATH = app.getPath('userData')
@@ -7,6 +9,10 @@ const { DiscordInterface } = require('./DiscordInterface.js')
 
 var config;
 var discordInterface;
+
+if (installing) {
+	app.quit()
+}
 
 function init(){
 	let configPath = path.join(APP_ROOT_PATH, 'config.json')
