@@ -42,7 +42,6 @@ function init(){
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-		titleBarStyle: 'hidden',
     width: 800,
     height: 600,
     webPreferences: {
