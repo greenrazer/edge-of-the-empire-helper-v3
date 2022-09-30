@@ -131,7 +131,7 @@ ipcMain.handle("chooseImage", (event) => {
 	return `data:image/${extname};base64,${base64}`
 })
 
-ipcMain.handle("importJson", (event, contents) => {
+ipcMain.handle("importCharacter", (event, contents) => {
 	let result = chooseFilePath([
 		{ name: "json", extensions: ["json"] }
 	])
@@ -149,13 +149,21 @@ ipcMain.handle("chooseFilePath", (event, contents) => {
 	return result
 })
 
-ipcMain.handle("exportJson", (event, contents) => {
+ipcMain.handle("exportCharacter", (event, contents) => {
 	let result = dialog.showSaveDialogSync({
 		defaultPath: `~/${contents["meta"]["filename"]}.json`,
     filters: [{ name: "json", extensions: ["json"] }]
   });
 
+	contents["meta"]["filename"] = result.replace(/^.*[\\\/]/, '')
+	let pos = contents["meta"]["filename"].lastIndexOf('.');
+	contents["meta"]["filename"] = contents["meta"]["filename"].substring(0,pos);
+
 	writeJSONToDisk(result, contents)
+})
+
+ipcMain.handle("doesCharacterFileNameExist", (event, character) => {
+	return fs.existsSync(path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`))
 })
 
 

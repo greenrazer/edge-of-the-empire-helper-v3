@@ -165,13 +165,33 @@ export class DataHolder {
 		this.alertAllListeners(this.CHARACTER_DELETED)
 	}
 
+	randomId(length) {
+		let result           = '';
+		let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.';
+		let charactersLength = characters.length;
+		for ( let i = 0; i < length; i++ ) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	}
+
 	createNewCharacter() {
 		let defaultPlayer = copy(this.data["defaultCharacter"])
-		this.data["characters"].push(defaultPlayer)
-		this.data["characterEditorInfo"].push({
-			'unsaved': true,
-		})
-		this.alertAllListeners(this.CHARACTER_ADDED)
+		defaultPlayer["meta"]["filename"] = this.randomId(50)
+		
+		let outputFunc = (doesExist) => {
+			if (doesExist){
+				defaultPlayer["meta"]["filename"] = this.randomId(50)
+				window.api.doesCharacterFileNameExist(defaultPlayer).then(outputFunc)
+				return
+			}
+			this.data["characters"].push(defaultPlayer)
+			this.data["characterEditorInfo"].push({
+				'unsaved': true,
+			})
+			this.alertAllListeners(this.CHARACTER_ADDED)
+		}
+		window.api.doesCharacterFileNameExist(defaultPlayer).then(outputFunc)
 	}
 
 	addNewCharacter(character) {

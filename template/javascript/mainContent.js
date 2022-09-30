@@ -55,6 +55,10 @@ export class MainContent extends React.Component {
 	}
 
 	handleSave(event) {
+		if ( window.data.get(["characters", this.state.characterId, "meta", "filename"]) == "" ){
+			alert("Must have filename in order to save.")
+			return
+		}
 		this.setState({
 			saving:true
 		})
@@ -64,7 +68,7 @@ export class MainContent extends React.Component {
 					saving:false,
 					unsavedChanges:false
 				})
-				window.data.set(['characterEditorInfo', window.data.currCharacterIndex, 'unsaved'], false)
+				window.data.set(['characterEditorInfo', this.state.characterId, 'unsaved'], false)
 			},1000);
 		});
 	}
@@ -108,8 +112,6 @@ export class MainContent extends React.Component {
 			this.state.showDiceRoller ? React.createElement(AllDiceRoller, {removeSelf: this.hideDiceRoller}) : null,
 			React.createElement('div', {id:'main-content'},
 				React.createElement('div', {id:'main-content-top-bar'},
-					React.createElement(TextDataCharacterDataInput, {characterDataPath: ["meta", "filename"], id:"meta-filename", name:"Filename"}),
-					React.createElement('span', {}, ".json"),
 					React.createElement('button', {title:"Save Character", onClick:this.handleSave}, React.createElement('i', {className:"mf mf-save"})),
 					React.createElement('span', {style:{display: this.state.saving ? '' : 'none'}}, "Saving"),
 					React.createElement('span', {style:{display: this.state.unsavedChanges ? '' : 'none', color:'red'}}, "Unsaved Changes"),

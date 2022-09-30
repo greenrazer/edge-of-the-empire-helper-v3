@@ -88,7 +88,8 @@ class CharacterSelector extends React.Component {
 			name: initName,
 			playerName: initPlayerName,
 			species: initSpecies,
-			unsavedChanges: initUnsaved
+			unsavedChanges: initUnsaved,
+			saving:false,
 		};
 		this.dataChangeHandler = (path, newValue) => {
 			if (path.length === 0) {
@@ -175,11 +176,21 @@ class CharacterSelector extends React.Component {
 	}
 
 	handleSave(event) {
+		if ( window.data.get(["characters", this.props.characterId, "meta", "filename"]) == "" ){
+			alert("Must have filename in order to save.")
+			return
+		}
+		this.setState({
+			saving: true
+		})
 		window.api.saveCharacter(window.data.get(["characters", this.props.characterId])).then((value) => {
-			this.setState({
-				unsavedChanges:false
-			})
-			window.data.set(['characterEditorInfo', this.props.characterId, 'unsaved'], false)
+			setTimeout(() => {
+				this.setState({
+					unsavedChanges:false,
+					saving:false
+				})
+				window.data.set(['characterEditorInfo', this.props.characterId, 'unsaved'], false)
+			}, 1000)
 		});
 	}
 
@@ -208,9 +219,9 @@ class CharacterSelector extends React.Component {
 				)
 			),
 			React.createElement('div', {className:"character-selector-buttons"},
-			React.createElement('button', {onClick: this.handleOpen}, 'Open'),
-			React.createElement('button', {onClick: this.handleSave}, 'Save'),
-			React.createElement('button', {onClick: this.handleDelete}, 'Delete'),
+				React.createElement('button', {onClick: this.handleOpen}, 'Open'),
+				React.createElement('button', {onClick: this.handleSave}, this.state.saving ? 'Saving...': 'Save'),
+				React.createElement('button', {onClick: this.handleDelete}, 'Delete'),
 			)
 		)
 	}

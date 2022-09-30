@@ -1,8 +1,7 @@
 {
 	"meta": {
-		"template": "default",
 		"version": "1.0",
-		"filename": "test"
+		"filename": ""
 	},
 	"settings": {
 		"discordChannelId": "",
@@ -34,23 +33,18 @@
 	},
 	"base": {
 		"image":"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",
-		"name": "test",
-		"playerName": "test",
-		"species": "test",
-		"gender": "test",
-		"height": "test",
-		"hair": "test",
-		"eyes": "test",
-		"age": "test",
-		"build": "test",
-		"notableFeatures": "test",
-		"career": "test",
-		"specializations": [
-			{
-				"name": "test",
-				"career": "test"
-			}
-		]
+		"name": "",
+		"playerName": "",
+		"species": "",
+		"gender": "",
+		"height": "",
+		"hair": "",
+		"eyes": "",
+		"age": "",
+		"build": "",
+		"notableFeatures": "",
+		"career": "",
+		"specializations": []
 	},
 	"stats": {
 		"wounds" : {
@@ -88,12 +82,7 @@
 			"currentBase": 0,
 			"current": 0
 		},
-		"criticalInjuries": [
-			{
-				"name": "test",
-				"description": "test"
-			}
-		],
+		"criticalInjuries": [],
 		"statusEffects":[
 			{"name":"Staggered", "active": false},
 			{"name":"Immobilized", "active": false},
@@ -359,209 +348,77 @@
 			"characteristic": "intellect"
 		}
 	],
-	"talents": [
-		{
-			"name": "test",
-			"ranks": 1,
-			"description": "test",
-			"specialization": "test",
-			"cost":0
-		}
-	],
-	"forcePowers": [
-		{
-			"name": "test",
-			"ranks": 0,
-			"description": "test",
-			"cost": 0
-		}
-	],
+	"talents": [],
+	"forcePowers": [],
 	"character": {
-		"motivations": [
-			{
-				"type": "test",
-				"description": "test"
-			}
-		],
+		"motivations": [],
 		"morality": 50,
 		"conflict": 50,
 		"emotionalWeakness": "",
 		"emotionalStrength": "",
-		"dutys": [
-			{
-				"type": "",
-				"description": "",
-				"value": 0
-			}
-		],
-		"obligations": [
-			{
-				"type": "",
-				"description": "",
-				"value": 0
-			}
-		]
+		"dutys": [],
+		"obligations": []
 	},
-	"armor": [
-		{
-			"name": "default",
-			"soak": 0,
-			"defense": {
-				"melee": 0,
-				"ranged":0
-			},
-			"encumberance": 0,
-			"hardPoints": 0,
-			"type": "test",
-			"make": "test",
-			"special": "test",
-			"condition": 0,
-			"cost": 0,
-			"attachments": [
-				{
-					"name": "test",
-					"hardPointReq": 0,
-					"cost": 0,
-					"baseModifiers": [
-						{
-							"name": "",
-							"description": ""
-						}
-					],
-					"modifications": [
-						{
-							"name": "",
-							"description" : "",
-							"cost":0
-						}
-					]
-				}
-			]
-		}
-	],
-	"weapons": [
-		{
-			"name": "test",
-			"type": "test",
-			"make": "test",
-			"special": "test",
-			"skill": "test",
-			"damage": 0,
-			"crit": 0,
-			"encumberance": 0,
-			"hardPoints": 0,
-			"range": 0,
-			"cost": 0,
-			"condition": 0,
-			"attachments": [
-				{
-					"name": "test",
-					"hardPointReq": 0,
-					"cost": 0,
-					"baseModifiers": [
-						{
-							"name": "",
-							"description": ""
-						}
-					],
-					"modifications": [
-						{
-							"name": "",
-							"description" : "",
-							"cost":0
-						}
-					]
-				}
-			]
-		}
-	],
+	"armor": [],
+	"weapons": [],
 	"cybernetics": {
 		"eyes": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"head": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"chest": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"torso": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"arm": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"hand": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"upperLeg": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		},
 		"lowerLeg": {
-			"make": "test",
-			"bonus": "test",
+			"make": "",
+			"bonus": "",
 			"functional": false,
 			"cost": 0
 		}
 	},
 	"finances": {
 		"credits": 0,
-		"owed": [
-			{
-				"amount" : 0,
-				"debtor": "test",
-				"reason": "test",
-				"paid": false
-			}
-		],
-		"debt": [
-			{
-				"amount" : 0,
-				"creditor": "test",
-				"reason": "test",
-				"paid": false
-			}
-		]
+		"owed": [],
+		"debt": []
 	},
 	"property": {
-		"gear": [
-			{
-				"name": "test",
-				"quantity": 0,
-				"costPerQuantity": 0,
-				"encumberance": 0
-			}
-		],
-		"other": [
-			{
-				"name": "test",
-				"quantity": 0,
-				"costPerQuantity": 0,
-				"encumberance": 0,
-				"location": "test"
-			}
-		]
+		"gear": [],
+		"other": []
 	},
-	"notes": "test"
+	"notes": ""
 }
