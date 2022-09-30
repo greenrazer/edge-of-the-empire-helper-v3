@@ -163,7 +163,7 @@ class CharacterSelector extends React.Component {
 	}
 
 	handleDelete(event) {
-		if (window.confirm("Are you sure you want to delete this character? (This is irreversible). This will delete all characters with the same FILENAME as this one. Make sure that there are no duplicate FILENAMES before performing this action.")) {
+		if (window.confirm("Are you sure you want to delete this character? (This is irreversible).")) {
 			window.api.deleteCharacter(window.data.get(["characters", this.props.characterId]))
 			window.data.deleteCharacter(this.props.characterId)
 		}
