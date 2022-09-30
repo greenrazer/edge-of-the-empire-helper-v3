@@ -87,11 +87,11 @@ body {
 }
 
 #main-content-top-bar {
-  background-color: #bba775;
+  background-color: #5a9ca7;
 }
 
 #pane-selector {
-  background-color: #c79896;
+  background-color: #96bcc7;
 }
 
 .pane-selector-elem {
@@ -101,11 +101,11 @@ body {
 }
 
 .pane-selector-elem:hover {
-  background-color: #4c595e;
+  background-color: #73a4a7;
 }
 
 .pane-selector-active {
-  background-color: #830117;
+  background-color: #73a4a7;
 }
 
 .right {
