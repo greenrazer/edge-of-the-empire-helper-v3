@@ -1,8 +1,7 @@
 import {DataHolder} from "./global/DataHolder.js"
 import {CharacterSelectorHolder} from "./characterSelector.js"
 import {MainContent} from "./mainContent.js"
-
-import { GlobalSettings } from "./full_viewport_boxes/GlobalSettings.js"
+import { GlobalSettings } from "./full_viewport_boxes/GlobalSettings.js";
 
 window.data = new DataHolder()
 			
@@ -34,6 +33,15 @@ function renderPage() {
 // 	return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
 // });
 
-refreshAllData().then(() => renderPage())
+refreshAllData().then(() => renderPage()).catch((err) => {
+	alert("Invalid path in global settings.")
+	const domContainer = document.getElementById('react-dom-container');
+	const root = ReactDOM.createRoot(domContainer);
+	root.render(React.createElement(GlobalSettings, {
+		removeSelf: () => {
+			location.reload()
+		}
+	}));
+})
 
 

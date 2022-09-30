@@ -4,16 +4,59 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron --unhandled-rejections=strict --trace-warnings ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "author": "",
+  "author": "Kyle B",
   "license": "ISC",
-  "description": "",
+  "description": "Edge of The Empire Tabletop Roleplay Helper V3",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.66",
+    "@electron-forge/maker-deb": "^6.0.0-beta.66",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.66",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
+    "@electron-forge/maker-zip": "^6.0.0-beta.66",
     "electron": "^18.2.0"
   },
   "dependencies": {
-    "discord.js-self": "^12.0.4",
-    "discord.js-selfbot-v13": "^2.6.14"
+    "discord.js-selfbot-v13": "^2.6.14",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "ignore": [
+          "^\/build_scripts",
+          "^\/old",
+          "^\/saved_characters",
+          "^\/.vscode",
+          "^\/.gitignore"
+        ],
+        "icon": "./images/EOTEAppIcon.icns"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "edge_of_empire_helper_v3"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }

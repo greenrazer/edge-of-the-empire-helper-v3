@@ -8,7 +8,7 @@ class DiscordInterface {
 		this.isReady = false
 		this.client = new Client();
 
-		if (token != "") {
+		if (token.trim() != "") {
 			this.discordConnected = true
 			this.client.on('ready', async () => {
 				console.debug(`Connected to discord as ${this.client.user.username}.`)

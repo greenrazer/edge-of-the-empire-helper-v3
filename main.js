@@ -1,24 +1,62 @@
 const {app, protocol, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
 const fs = require('fs');
+const APP_ROOT_PATH = app.getPath('userData')
 
 const { DiscordInterface } = require('./DiscordInterface.js')
 
-let config = getGlobalSettingsFromDisk('./config.json');
-let discordInterface = new DiscordInterface(config['discordToken'])
+var config;
+var discordInterface;
+
+function init(){
+	let configPath = path.join(APP_ROOT_PATH, 'config.json')
+
+	if (!fs.existsSync(configPath)){
+		config = {
+			"defaultCharacterPath": {
+				"value": path.join(__dirname, "defaultCharacter.json"),
+				"UIType": "path"
+			},
+			"characterSavedPath":{
+				"value": path.join(APP_ROOT_PATH, "saved_characters"),
+				"UIType": "path"
+			},
+			"discordToken": {
+				"value": "",
+				"UIType": "string"
+			}
+		}
+    writeJSONToDisk(configPath, config)
+	}
+	else {
+		config = filenameToJson(configPath)
+	}
+
+	if (!fs.existsSync(config["characterSavedPath"]["value"])){
+		fs.mkdirSync(config["characterSavedPath"]["value"]);
+	}
+
+	discordInterface = new DiscordInterface(config['discordToken']["value"])
+}
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+		titleBarStyle: 'hidden',
     width: 800,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+		icon: path.join(__dirname, "images/EOTEAppIcon.ico")
   })
-
-  mainWindow.loadFile('template/main.html')
-	mainWindow.on("ready-to-show", mainWindow.show)
+	
+	mainWindow.setMenuBarVisibility(false)
+	mainWindow.maximize();
+  mainWindow.loadFile(path.join(__dirname, 'template/main.html'))
+	mainWindow.on("ready-to-show", () => {
+		mainWindow.show();
+	})
 }
 
 app.whenReady().then(() => {
@@ -29,6 +67,7 @@ app.whenReady().then(() => {
     if (err) console.error('Failed to register protocol')
   })
 	
+	init()
   createWindow()
 
   app.on('activate', function () {
@@ -66,7 +105,7 @@ ipcMain.handle("getGlobalSettings", (event) => {
 ipcMain.handle("setGlobalSettings", (event, globalSettings) => {
 	if (discordInterface.getToken() != globalSettings["discordToken"]){
 		discordInterface.logOut()
-		discordInterface = new DiscordInterface(globalSettings["discordToken"])
+		discordInterface = new DiscordInterface(globalSettings["discordToken"]["value"])
 	}
 	return writeGlobalSettingstoDisk(globalSettings)
 })
@@ -93,52 +132,76 @@ ipcMain.handle("chooseImage", (event) => {
 })
 
 ipcMain.handle("importJson", (event, contents) => {
-	let result = dialog.showOpenDialogSync({
-    properties: ["openFile"],
-    filters: [{ name: "json", extensions: ["json"] }]
-  });
+	let result = chooseFilePath([
+		{ name: "json", extensions: ["json"] }
+	])
+	if (!result){
+		throw "File Not Specified."
+	}
+	return filenameToJson(result)
+})
 
-	return filenameToJson(result[0])
+ipcMain.handle("chooseFilePath", (event, contents) => {
+	let result = chooseFilePath([
+		{ name: "json", extensions: ["json"] }
+	])
+
+	return result
 })
 
 ipcMain.handle("exportJson", (event, contents) => {
 	let result = dialog.showSaveDialogSync({
 		defaultPath: `~/${contents["meta"]["filename"]}.json`,
-    filters: [{ name: "Json Object", extensions: ["json"] }]
+    filters: [{ name: "json", extensions: ["json"] }]
   });
 
 	writeJSONToDisk(result, contents)
 })
 
 
+function chooseFilePath(filters) {
+	let result = dialog.showOpenDialogSync({
+    properties: ["openFile"],
+    filters: filters
+  });
+
+	return result ? result[0] : result
+}
+
 function getDefaultCharacterFromDisk() {
-	return filenameToJson(config["defaultCharacterFilename"])
+	if (!fs.existsSync(config["defaultCharacterPath"]["value"])){
+		return null
+	}
+	return filenameToJson(config["defaultCharacterPath"]["value"])
 }
 
 function getCharactersFromDisk() {
-	let characterFilenames = getFolderJSONFilenames(config["characterSavedFolder"]);
+	let characterFilenames = getFolderJSONFilenames(config["characterSavedPath"]["value"]);
 	let characters = filenamesToJson(characterFilenames)
 	return characters	
 }
 
 function writeCharacterToDisk(character) {
-	writeJSONToDisk(`${config["characterSavedFolder"]}/${character["meta"]["filename"]}.json`, character)
+	writeJSONToDisk(path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`), character)
 }
 
 function deleteCharacterFromDisk(character) {
-	fs.unlinkSync(`${config["characterSavedFolder"]}/${character["meta"]["filename"]}.json`)
+	fs.unlinkSync(path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`))
 }
 
 function getGlobalSettingsFromDisk() {
-	return filenameToJson('./config.json')	
+	return filenameToJson(path.join(APP_ROOT_PATH, 'config.json'))	
 }
 
 function writeGlobalSettingstoDisk(globalSettings) {
 	config = globalSettings
-	writeJSONToDisk('./config.json', globalSettings)
+	writeJSONToDisk(path.join(APP_ROOT_PATH, 'config.json'), globalSettings)
 }
 
 function getFolderJSONFilenames(folder){
+	if (!fs.existsSync(folder)){
+		return []
+	}
 	let files = fs.readdirSync(folder)
 		.map(file => folder + "/" + file)
 		.filter(file => fs.lstatSync(file).isFile() && path.extname(file) == '.json');

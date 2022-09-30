@@ -12,6 +12,7 @@ const API = {
 	chooseImage: () => ipcRenderer.invoke('chooseImage'),
 	exportJson: (contents) => ipcRenderer.invoke('exportJson', contents),
 	importJson: () => ipcRenderer.invoke('importJson'),
+	chooseFilePath: () => ipcRenderer.invoke('chooseFilePath')
 }
 
 contextBridge.exposeInMainWorld("api", API);

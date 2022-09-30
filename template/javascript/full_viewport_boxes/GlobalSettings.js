@@ -11,6 +11,7 @@ export class GlobalSettings extends FullViewportBox {
 
 		this.handleSave = this.handleSave.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+		this.handleChooseFile = this.handleChooseFile.bind(this)
 	}
 
 	handleSave() {
@@ -20,8 +21,18 @@ export class GlobalSettings extends FullViewportBox {
 
 	handleChange(id, event) {
 		let obj = {}
-		obj[id] = event.target.value
+		obj[id] = this.state[id]
+		obj[id]["value"] = event.target.value
 		this.setState(obj)
+	}
+
+	handleChooseFile(id) {
+		window.api.chooseFilePath().then((filePath) => {
+			let obj = {}
+			obj[id] = this.state[id]
+			obj[id]["value"] = filePath
+			this.setState(obj)
+		})
 	}
 
 	render() {
@@ -30,20 +41,40 @@ export class GlobalSettings extends FullViewportBox {
 		let q = 0
 
 		for(let key in this.state){
-			let value = this.state[key]
+			let UIType = this.state[key]["UIType"]
+			let value = this.state[key]["value"]
 			let inputId = `global-settings-input-${key}`
 			let title = camelCaseToTitleCase(key)
 
-			let elem = React.createElement('div', {className:"span-col-twelve-grid-whole", key:q++},
-				React.createElement("label", {htmlFor: inputId}, title),
-				React.createElement("input", {
-					name: inputId,
-					id: inputId,
-					type: "text",
-					value: value,
-					onChange: (event) => this.handleChange(key, event),
-				})
-			)
+			let elem; 
+			if (UIType == "path") {
+				elem = React.createElement('div', {className:"span-col-twelve-grid-whole", key:q++},
+					React.createElement("label", {htmlFor: inputId}, title),
+					React.createElement("input", {
+						name: inputId,
+						id: inputId,
+						type: "text",
+						value: value,
+						onChange: (event) => this.handleChange(key, event),
+					}),
+					React.createElement("button", {
+							onClick: (event) => this.handleChooseFile(key), 
+							className: "", 
+							title:"Choose File"
+						},"Choose File"),
+				)
+			} else if (UIType == "string") {
+				elem = React.createElement('div', {className:"span-col-twelve-grid-whole", key:q++},
+					React.createElement("label", {htmlFor: inputId}, title),
+					React.createElement("input", {
+						name: inputId,
+						id: inputId,
+						type: "text",
+						value: value,
+						onChange: (event) => this.handleChange(key, event),
+					}),
+				)
+			}
 
 			arr.push(elem)
 		}
