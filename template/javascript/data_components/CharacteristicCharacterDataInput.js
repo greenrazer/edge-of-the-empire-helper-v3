@@ -1,3 +1,5 @@
+import { calcCharacterStats } from "../global/calcCharacterStats.js";
+
 import { RollBox } from '../full_viewport_boxes/RollBox.js'
 import { PositiveIntegerCharacterDataInputBasedOn } from './PositiveIntegerCharacterDataInputBasedOn.js'
 
@@ -11,63 +13,7 @@ export class CharacterisitcDataInput extends React.Component {
 			currCharacter: window.data.currCharacterIndex
 		}
 
-		this.dataChangeHandler2 = (path, newValue) => {
-			if (path.length === 0) {
-				return
-			}
-
-			if(window.data.currCharacterIndex < 0) {
-				return
-			}
-
-			let settings = window.data.getPathCurrentCharacter(["settings"])
-			
-			let soak = 0
-			let ranged = 0
-			let melee = 0
-			let encumberance = 0
-			
-			let armors = window.data.getPathCurrentCharacter(["armor"])
-			for (let armor of armors){
-				soak += armor["soak"]
-				melee += armor["defense"]["melee"]
-				ranged += armor["defense"]["ranged"]
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, armor["encumberance"])
-				}
-				else{
-					encumberance += armor["encumberance"]
-				}
-			}
-
-			let weapons = window.data.getPathCurrentCharacter(["weapons"])
-			for (let weapon of weapons){
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, weapon["encumberance"])
-				}
-				else{
-					encumberance += weapon["encumberance"]
-				}
-			}
-
-			let gears = window.data.getPathCurrentCharacter(["property", "gear"])
-			for (let gear of gears){
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, gear["encumberance"])
-				}
-				else{
-					encumberance += gear["encumberance"]
-				}
-			}
-
-			let brawn = window.data.getPathCurrentCharacter(["characteristics" , "brawn", "rank"])
-			soak += brawn
-
-			window.data.setPathCurrentCharacter(["stats", "soak", "base"], soak)
-			window.data.setPathCurrentCharacter(["stats", "defense", "melee", "base"], melee)
-			window.data.setPathCurrentCharacter(["stats", "defense", "ranged", "base"], ranged)
-			window.data.setPathCurrentCharacter(["stats", "encumberance", "currentBase"], encumberance)
-		};
+		this.dataChangeHandler2 = calcCharacterStats;
 
 		window.data.addListenerCurrentCharacter(['characteristics'], this.dataChangeHandler2);
 

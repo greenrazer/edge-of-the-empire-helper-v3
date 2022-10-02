@@ -36,7 +36,6 @@ class DiscordInterface {
 	}
 
 	sendMessageToChannel(channelId, message){
-		console.debug("sent' " + message + "' to " + channelId)
 		if(!this.discordConnected) {
 			return
 		}
@@ -44,6 +43,7 @@ class DiscordInterface {
 			setTimeout(() => this.sendMessageToChannel(channelId, message), 10)
 			return
 		}
+		console.debug("sent' " + message + "' to " + channelId)
 		const channel = this.client.channels.cache.get(channelId);
 		if(channel == undefined){
 			return Promise.reject(new Error("Channel Does Not Exist."))
