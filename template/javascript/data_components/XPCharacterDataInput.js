@@ -27,6 +27,9 @@ export class XPCharacterDataInput extends React.Component {
 
 	setListeners() {
 		this.dataChangeHandler = (path, newValue) => {
+			if(window.data.currCharacterIndex < 0) {
+				return
+			}
 			let xp = window.data.getPathCurrentCharacter(this.state.xpDataPath)
 
 			let xpCosts = 0

@@ -6,10 +6,19 @@ export class CharacterisitcDataInput extends React.Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {}
-		this.state.showDiceRollBox = false
+		this.state = {
+			showDiceRollBox: false,
+			currCharacter: window.data.currCharacterIndex
+		}
 
 		this.dataChangeHandler2 = (path, newValue) => {
+			if (path.length === 0) {
+				return
+			}
+
+			if(window.data.currCharacterIndex < 0) {
+				return
+			}
 
 			let settings = window.data.getPathCurrentCharacter(["settings"])
 			
@@ -67,7 +76,7 @@ export class CharacterisitcDataInput extends React.Component {
 	}
 
 	componentWillUnmount() {
-		window.data.removeListenerCurrentCharacter(['characteristics'], this.dataChangeHandler2);
+		window.data.removeListener(['characters', this.state.currCharacter ,'characteristics'], this.dataChangeHandler2);
 	}
 
 	handleRoll(event, i) {

@@ -5,7 +5,7 @@ import { CharacterArrayBox } from "./CharacterArrayBox.js";
 
 export class OwedArrayBox extends CharacterArrayBox {
 	defaultData() {
-		return {"debtor": "", "amount": 0, "reason": 0, "paid": false}
+		return {"debtor": "", "amount": 0, "reason": "", "paid": false}
 	}
 
 	getData() {

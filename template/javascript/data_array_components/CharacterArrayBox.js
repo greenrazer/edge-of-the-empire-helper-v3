@@ -8,7 +8,8 @@ export class CharacterArrayBox extends React.Component {
 		let initData = window.data.get(dataPath)
 		this.state = {
 			dataPath: dataPath,
-			dataLen: initData.length
+			dataLen: initData.length,
+			currCharacter: window.data.currCharacterIndex,
 		};
 
 		this.dataChangeHandler = (path, newValue) => {

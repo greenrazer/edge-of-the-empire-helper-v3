@@ -265,7 +265,10 @@ function writeCharacterToDisk(character) {
 }
 
 function deleteCharacterFromDisk(character) {
-	fs.unlinkSync(path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`))
+	let deletePath = path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`)
+	if( fs.existsSync(deletePath) ){
+		fs.unlinkSync(deletePath)
+	}
 }
 
 function getGlobalSettingsFromDisk() {

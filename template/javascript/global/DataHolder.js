@@ -58,7 +58,8 @@ export class DataHolder {
 
 	getPathCurrentCharacter(characterPath) {
 		if (this.currCharacterIndex < 0) {
-			throw "No character currently selected "
+			var err = new Error();
+			throw `No character currently selected \n ${err.stack}`
 		}
 
 		let pathCopy = JSON.parse(JSON.stringify(characterPath))
@@ -81,7 +82,8 @@ export class DataHolder {
 				currData = currData[nextKey]
 			}
 			else {
-				throw `Could not find path: ${path} in data`
+				var err = new Error();
+				throw `Could not find path: ${path} in data: \n ${err.stack}`
 			}
 		}
 
@@ -93,7 +95,8 @@ export class DataHolder {
 
 	setPathCurrentCharacter(characterPath, value) {
 		if (this.currCharacterIndex < 0) {
-			throw "No character currently selected "
+			var err = new Error();
+			throw `No character currently selected \n ${err.stack}`
 		}
 
 		let pathCopy = JSON.parse(JSON.stringify(characterPath))
@@ -121,7 +124,8 @@ export class DataHolder {
 				currData = currData[nextKey]
 			}
 			else {
-				throw `Could not find path: ${path} in data`
+				var err = new Error();
+				throw `Could not find path: ${path} in data: \n ${err.stack}`
 			}
 		}
 
@@ -140,7 +144,8 @@ export class DataHolder {
 				currData = currData[nextKey]
 			}
 			else {
-				throw `Could not find path: ${path} in data`
+				var err = new Error();
+				throw `Could not find path: ${path} in data: \n ${err.stack}`
 			}
 		}
 
@@ -178,7 +183,7 @@ export class DataHolder {
 	createNewCharacter() {
 		let defaultPlayer = copy(this.data["defaultCharacter"])
 		defaultPlayer["meta"]["filename"] = this.randomId(50)
-		
+
 		let outputFunc = (doesExist) => {
 			if (doesExist){
 				defaultPlayer["meta"]["filename"] = this.randomId(50)
@@ -301,7 +306,8 @@ export class DataHolder {
 
 	addListenerCurrentCharacter(characterPath, callback) {
 		if (this.currCharacterIndex < 0) {
-			throw "No character currently selected "
+			var err = new Error();
+			throw `No character currently selected \n ${err.stack}`
 		}
 
 		let pathCopy = JSON.parse(JSON.stringify(characterPath))
@@ -334,7 +340,8 @@ export class DataHolder {
 
 	removeListenerCurrentCharacter(characterPath, callback) {
 		if (this.currCharacterIndex < 0) {
-			throw "No character currently selected "
+			var err = new Error();
+			throw `No character currently selected \n ${err.stack}`
 		}
 
 		let pathCopy = JSON.parse(JSON.stringify(characterPath))

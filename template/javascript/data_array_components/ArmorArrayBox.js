@@ -10,6 +10,13 @@ export class ArmorArrayBox extends CharacterArrayBox {
 		super(props)
 
 		this.dataChangeHandler2 = (path, newValue) => {
+			if (path.length === 0) {
+				return
+			}
+
+			if(window.data.currCharacterIndex < 0) {
+				return
+			}
 
 			let settings = window.data.getPathCurrentCharacter(["settings"])
 			
@@ -64,7 +71,7 @@ export class ArmorArrayBox extends CharacterArrayBox {
 	}
 
 	componentWillUnmount() {
-		window.data.removeListenerCurrentCharacter(['armor'], this.dataChangeHandler2);
+		window.data.removeListener(['characters', this.state.currCharacter, 'armor'], this.dataChangeHandler2);
 	}
 
 	defaultData() {

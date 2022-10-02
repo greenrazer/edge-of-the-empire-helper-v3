@@ -22,6 +22,9 @@ export class CreditsCharacterDataInput extends React.Component {
 
 	setListeners() {
 		this.dataChangeHandler = (path, newValue) => {
+			if(window.data.currCharacterIndex < 0) {
+				return
+			}
 			let credits = window.data.getPathCurrentCharacter(this.state.creditsDataPath)
 
 			let creditsCosts = 0
