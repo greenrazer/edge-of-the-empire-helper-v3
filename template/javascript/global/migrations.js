@@ -14,6 +14,7 @@ function v1_0ToV1_0_1(characterId) {
 		"encumberance": "brawn",
 		"strain": "willpower"
 	})
+	window.data.set(["characters", characterId, "meta", "version"], "1.0.1")
 }
 
 export function migrationNeeded(characterId){
