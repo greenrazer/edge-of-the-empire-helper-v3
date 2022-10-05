@@ -7,7 +7,11 @@ export function calcCharacterStats(path, newValue) {
 		return
 	}
 
-	let settings = window.data.getPathCurrentCharacter(["settings"])
+	calcCharacterStatsFromCharacterId(window.data.currCharacterIndex)
+}
+
+export function calcCharacterStatsFromCharacterId(characterId) {
+	let settings = window.data.get(["characters", characterId, "settings"])
 	
 	let wound = 0
 	let strain = 0
@@ -17,7 +21,7 @@ export function calcCharacterStats(path, newValue) {
 	let encumberance = 0
 	let encumberanceVal = 0
 	
-	let armors = window.data.getPathCurrentCharacter(["armor"])
+	let armors = window.data.get(["characters", characterId, "armor"])
 	for (let armor of armors){
 		soak += armor["soak"]
 		melee += armor["defense"]["melee"]
@@ -30,7 +34,7 @@ export function calcCharacterStats(path, newValue) {
 		}
 	}
 
-	let weapons = window.data.getPathCurrentCharacter(["weapons"])
+	let weapons = window.data.get(["characters", characterId, "weapons"])
 	for (let weapon of weapons){
 		if (settings["encumberanceMode"] == "max") {
 			encumberance = Math.max(encumberance, weapon["encumberance"])
@@ -40,7 +44,7 @@ export function calcCharacterStats(path, newValue) {
 		}
 	}
 
-	let gears = window.data.getPathCurrentCharacter(["property", "gear"])
+	let gears = window.data.get(["characters", characterId, "property", "gear"])
 	for (let gear of gears){
 		if (settings["encumberanceMode"] == "max") {
 			encumberance = Math.max(encumberance, gear["encumberance"])
@@ -50,19 +54,23 @@ export function calcCharacterStats(path, newValue) {
 		}
 	}
 
-	let brawn = window.data.getPathCurrentCharacter(["characteristics" , "brawn", "rank"])
-	soak += brawn
-	wound += brawn
-	encumberanceVal += brawn + 5
+	let soakBase = window.data.get(["characters", characterId, "characteristics" , settings["statsBaseCharacteristic"]["soak"], "rank"])
+	soak += soakBase
 
-	let willpower = window.data.getPathCurrentCharacter(["characteristics" , "willpower", "rank"])
-	strain += willpower
+	let woundsBase = window.data.get(["characters", characterId, "characteristics" , settings["statsBaseCharacteristic"]["wounds"], "rank"])
+	wound += woundsBase
 
-	window.data.setPathCurrentCharacter(["stats", "soak", "base"], soak)
-	window.data.setPathCurrentCharacter(["stats", "wounds", "base"], wound)
-	window.data.setPathCurrentCharacter(["stats", "strain", "base"], strain)
-	window.data.setPathCurrentCharacter(["stats", "defense", "melee", "base"], melee)
-	window.data.setPathCurrentCharacter(["stats", "defense", "ranged", "base"], ranged)
-	window.data.setPathCurrentCharacter(["stats", "encumberance", "base"], encumberanceVal)
-	window.data.setPathCurrentCharacter(["stats", "encumberance", "currentBase"], encumberance)
+	let encumberanceBase = window.data.get(["characters", characterId, "characteristics" , settings["statsBaseCharacteristic"]["encumberance"], "rank"])
+	encumberanceVal += encumberanceBase
+
+	let strainBase = window.data.get(["characters", characterId, "characteristics" , settings["statsBaseCharacteristic"]["strain"], "rank"])
+	strain += strainBase
+
+	window.data.set(["characters", characterId, "stats", "soak", "base"], soak)
+	window.data.set(["characters", characterId, "stats", "wounds", "base"], wound)
+	window.data.set(["characters", characterId, "stats", "strain", "base"], strain)
+	window.data.set(["characters", characterId, "stats", "defense", "melee", "base"], melee)
+	window.data.set(["characters", characterId, "stats", "defense", "ranged", "base"], ranged)
+	window.data.set(["characters", characterId, "stats", "encumberance", "base"], encumberanceVal)
+	window.data.set(["characters", characterId, "stats", "encumberance", "currentBase"], encumberance)
 }

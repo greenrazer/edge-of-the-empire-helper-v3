@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"version": "1.0",
+		"version": "1.0.1",
 		"filename": ""
 	},
 	"settings": {
@@ -29,7 +29,13 @@
 				"multiplier": 10
 			}
 		},
-		"encumberanceMode": "max"
+		"encumberanceMode": "max",
+		"statsBaseCharacteristic": {
+			"soak": "brawn",
+			"wounds": "brawn",
+			"encumberance": "brawn",
+			"strain": "willpower"
+		}
 	},
 	"base": {
 		"image":"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",

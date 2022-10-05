@@ -1,4 +1,6 @@
 import { GlobalSettings } from "./full_viewport_boxes/GlobalSettings.js";
+import { calcCharacterStatsFromCharacterId } from "./global/calcCharacterStats.js";
+import { migrateCharacter, migrationNeeded } from "./global/migrations.js";
 import { equalArray } from "./global/utils.js";
 
 export class CharacterSelectorHolder extends React.Component {
@@ -83,6 +85,7 @@ class CharacterSelector extends React.Component {
 		let initPlayerName = window.data.get(this.dataPathPlayerName)
 		let initSpecies = window.data.get(this.dataPathSpecies)
 		let initUnsaved = window.data.get(this.dataPathUnsaved)
+		let initMigration = migrationNeeded(this.props.characterId)
 		this.state = { 
 			image: initImage,
 			name: initName,
@@ -90,6 +93,7 @@ class CharacterSelector extends React.Component {
 			species: initSpecies,
 			unsavedChanges: initUnsaved,
 			saving:false,
+			needMigration: initMigration,
 		};
 		this.dataChangeHandler = (path, newValue) => {
 			if (path.length === 0) {
@@ -142,6 +146,7 @@ class CharacterSelector extends React.Component {
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleFile = this.handleFile.bind(this);
 		this.handleSave = this.handleSave.bind(this);
+		this.handleMigration = this.handleMigration.bind(this);
 	}
 
 	componentWillUnmount() {
@@ -194,6 +199,14 @@ class CharacterSelector extends React.Component {
 		});
 	}
 
+	handleMigration(event){
+		migrateCharacter(this.props.characterId)
+		calcCharacterStatsFromCharacterId(this.props.characterId)
+		this.setState({
+			needMigration:false
+		})
+	}
+
 	render() {
 		return React.createElement('div', {className:"character-selector"},
 			React.createElement('div', {className:"character-selector-top"},
@@ -215,11 +228,12 @@ class CharacterSelector extends React.Component {
 					),
 					React.createElement('div', null,
 						React.createElement('span', {style:{display: this.state.unsavedChanges ? '' : 'none', color:'red'}}, "Unsaved Changes"),
+						React.createElement('span', {style:{display: this.state.needMigration ? '' : 'none', color:'blue'}}, "Need Migration"),
 					)
 				)
 			),
 			React.createElement('div', {className:"character-selector-buttons"},
-				React.createElement('button', {onClick: this.handleOpen}, 'Open'),
+				this.state.needMigration ? React.createElement('button', {onClick: this.handleMigration}, 'Migrate') : React.createElement('button', {onClick: this.handleOpen}, 'Open'),
 				React.createElement('button', {onClick: this.handleSave}, this.state.saving ? 'Saving...': 'Save'),
 				React.createElement('button', {onClick: this.handleDelete}, 'Delete'),
 			)

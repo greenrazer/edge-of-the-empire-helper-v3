@@ -2,61 +2,13 @@ import { FullViewportBox } from "./FullViewportBox.js"
 import { TextDataCharacterDataInput } from "../data_components/TextDataCharacterDataInput.js";
 import { PositiveIntegerCharacterDataInput } from "../data_components/PositiveIntegerCharacterDataInput.js";
 import { SelectCharacterDataInput } from "../data_components/SelectCharacterDataInput.js";
+import { calcCharacterStats } from "../global/calcCharacterStats.js";
 
 export class CharacterSettings extends FullViewportBox {
 	constructor(props) {
 		super(props);
 
-		this.dataChangeHandler2 = (path, newValue) => {
-
-			let settings = window.data.getPathCurrentCharacter(["settings"])
-			
-			let soak = 0
-			let ranged = 0
-			let melee = 0
-			let encumberance = 0
-			
-			let armors = window.data.getPathCurrentCharacter(["armor"])
-			for (let armor of armors){
-				soak += armor["soak"]
-				melee += armor["defense"]["melee"]
-				ranged += armor["defense"]["ranged"]
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, armor["encumberance"])
-				}
-				else{
-					encumberance += armor["encumberance"]
-				}
-			}
-
-			let weapons = window.data.getPathCurrentCharacter(["weapons"])
-			for (let weapon of weapons){
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, weapon["encumberance"])
-				}
-				else{
-					encumberance += weapon["encumberance"]
-				}
-			}
-
-			let gears = window.data.getPathCurrentCharacter(["property", "gear"])
-			for (let gear of gears){
-				if (settings["encumberanceMode"] == "max") {
-					encumberance = Math.max(encumberance, gear["encumberance"])
-				}
-				else{
-					encumberance += gear["encumberance"]
-				}
-			}
-
-			let brawn = window.data.getPathCurrentCharacter(["characteristics" , "brawn", "rank"])
-			soak += brawn
-
-			window.data.setPathCurrentCharacter(["stats", "soak", "base"], soak)
-			window.data.setPathCurrentCharacter(["stats", "defense", "melee", "base"], melee)
-			window.data.setPathCurrentCharacter(["stats", "defense", "ranged", "base"], ranged)
-			window.data.setPathCurrentCharacter(["stats", "encumberance", "currentBase"], encumberance)
-		};
+		this.dataChangeHandler2 = calcCharacterStats
 
 		window.data.addListenerCurrentCharacter(['settings'], this.dataChangeHandler2);
 	}
@@ -110,6 +62,19 @@ export class CharacterSettings extends FullViewportBox {
 
 					React.createElement('div', {className:"span-col-twelve-grid-whole"},
 						React.createElement(SelectCharacterDataInput, {characterDataPath: ["settings", "encumberanceMode"], id: "character-settings-encumberance-mode", name: "Encumberance Mode", values: {"max": "Max Encumberance","total": "Total Encumberance"}}),
+					),
+
+					React.createElement('div', {className:"span-col-twelve-grid-whole"},
+						React.createElement(SelectCharacterDataInput, {characterDataPath: ["settings", "statsBaseCharacteristic", "soak"], id: "character-settings-statsBaseCharacteristic-soak", name: "Soak Base Characterisitic", values: {"brawn": "Br","agility": "Ag","intellect": "Int","cunning": "Cun","willpower": "Will","presence": "Pr", "forceRank": "Fr"}}),
+					),
+					React.createElement('div', {className:"span-col-twelve-grid-whole"},
+						React.createElement(SelectCharacterDataInput, {characterDataPath: ["settings", "statsBaseCharacteristic", "wounds"], id: "character-settings-statsBaseCharacteristic-wounds", name: "Wounds Base Characterisitic", values: {"brawn": "Br","agility": "Ag","intellect": "Int","cunning": "Cun","willpower": "Will","presence": "Pr", "forceRank": "Fr"}}),
+					),
+					React.createElement('div', {className:"span-col-twelve-grid-whole"},
+						React.createElement(SelectCharacterDataInput, {characterDataPath: ["settings", "statsBaseCharacteristic", "encumberance"], id: "character-settings-statsBaseCharacteristic-encumberance", name: "Encumberance Base Characterisitic", values: {"brawn": "Br","agility": "Ag","intellect": "Int","cunning": "Cun","willpower": "Will","presence": "Pr", "forceRank": "Fr"}}),
+					),
+					React.createElement('div', {className:"span-col-twelve-grid-whole"},
+						React.createElement(SelectCharacterDataInput, {characterDataPath: ["settings", "statsBaseCharacteristic", "strain"], id: "character-settings-statsBaseCharacteristic-strain", name: "Strain Base Characterisitic", values: {"brawn": "Br","agility": "Ag","intellect": "Int","cunning": "Cun","willpower": "Will","presence": "Pr", "forceRank": "Fr"}}),
 					),
 
 					React.createElement('button', {onClick: this.props.removeSelf, className: "", title:"Ok"}, "Ok"),
