@@ -6,7 +6,9 @@ A character sheet, dice roller, and discord remote for Star Wars Tabletop RPGs.
 
 Streamlines the online RPG experience by sending [FFGNDS Discord Dice Roller](https://github.com/SkyJedi/FFGNDS-Discord-Dice-Roller) commands to Discord from the push of a button on your character sheet.
 
-![Image of app](images/readme_image_1.png)
+![App Screenshot 1](images/readme_image_1.png)
+![App Screenshot 2](images/readme_image_2.png)
+![App Screenshot 3](images/readme_image_3.png)
 
 ## Instalation
 
