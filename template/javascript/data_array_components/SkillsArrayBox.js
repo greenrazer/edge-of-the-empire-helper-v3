@@ -60,6 +60,9 @@ export class SkillsArrayBox extends CharacterArrayBox {
 					yellow: yellow
 				})
 			}
+			else {
+				diceBox = null
+			}
 
 			skills.push(
 				React.createElement('div', {className:"col-7-grid-last-two-button array-box-row",key: i},
