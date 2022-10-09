@@ -90,11 +90,12 @@ export class ForceTreeDataInput extends React.Component{
 			let item = this.state.treeData["items"][boxStyle["id"]];
 			let enabled = this.itemIsEnabled(item)
 			let width = boxStyle["width"]
+			let active = this.characterHasItem(boxStyle["id"]);
 
 			let bottomConnections = []
 			for(let i = 0; i < boxStyle["width"]; i++){
 				bottomConnections.push(React.createElement('div',{key:i, className:"width-25-percent-float-left height-20-percent-min-10px", style: {width: `${100*(1/width)}%`}}, 
-					boxStyle["down"].includes(i) ? React.createElement('div', {className:"centered-black-block"}) : null)
+					boxStyle["down"].includes(i) ? React.createElement('div', {className: active ?  "centered-activated-block" : "centered-black-block"}) : null)
 				)
 			}
 
@@ -105,7 +106,7 @@ export class ForceTreeDataInput extends React.Component{
 					},
 					key:q++
 				},
-				React.createElement('div', {className:"width-10-percent-float-left height-80-percent-min-15px", style:{width:"calc(10% - 13px)"}}, boxStyle["left"] ? React.createElement('div', {className:"vertically-center"}): null),
+				React.createElement('div', {className:"width-10-percent-float-left height-80-percent-min-15px", style:{width:"calc(10% - 13px)"}}, boxStyle["left"] ? React.createElement('div', {className:active ? "vertically-activated-center": "vertically-center"}): null),
 				React.createElement('div', {className:"width-80-percent-float-left height-80-percent-min-15px solid-black-border padding-10"}, 
 					!enabled ? React.createElement('div', null, "Requirements Not Met") : null, 
 					React.createElement('div', null, item['name']),
@@ -113,11 +114,11 @@ export class ForceTreeDataInput extends React.Component{
 					React.createElement('div', null, item['description']),
 					React.createElement("input", {
 						type: "checkbox",
-						checked: this.characterHasItem(boxStyle["id"]),
+						checked: active,
 						onChange: (event) => this.handleChange(event, boxStyle["id"], item),
 					})
 				),
-				React.createElement('div', {className:"width-10-percent-float-left height-80-percent-min-15px", style:{width:"calc(10% - 13px)"}}, boxStyle["right"] ? React.createElement('div', {className:"vertically-center"}): null),
+				React.createElement('div', {className:"width-10-percent-float-left height-80-percent-min-15px", style:{width:"calc(10% - 13px)"}}, boxStyle["right"] ? React.createElement('div', {className:active ? "vertically-activated-center": "vertically-center"}): null),
 				bottomConnections,
 			))
 		}
