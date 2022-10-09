@@ -355,7 +355,17 @@
 		}
 	],
 	"talents": [],
-	"forcePowers": [],
+	"forcePowers": {
+		"treename": [
+			{	
+				"id": "id",
+				"name": "name",
+				"description": "asfasdfasdf",
+				"xpCost": 100
+			}
+		]
+	},
+	"customForcePowers": [],
 	"character": {
 		"motivations": [],
 		"morality": 50,

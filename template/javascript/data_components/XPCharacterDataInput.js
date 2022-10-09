@@ -117,8 +117,10 @@ export class XPCharacterDataInput extends React.Component {
 
 			// Force Powers
 			let forcePowers = window.data.getPathCurrentCharacter(["forcePowers"])
-			for (let i in forcePowers){
-				xpCosts += forcePowers[i]["cost"]
+			for (let treeName in forcePowers){
+				for (let forcePower of forcePowers[treeName]){
+					xpCosts += forcePower["xpCost"]
+				}
 			}
 
 			this.setState({

@@ -1,6 +1,7 @@
 export class FullViewportBox extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {}
 
 		this.handleCustom = this.handleCustom.bind(this)
 	}

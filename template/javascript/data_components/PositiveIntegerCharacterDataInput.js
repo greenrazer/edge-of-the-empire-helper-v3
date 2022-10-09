@@ -29,6 +29,7 @@ export class PositiveIntegerCharacterDataInput extends CharacterDataInput {
 				step:1,
 				value: this.state.value,
 				onChange: this.handleChange,
+				readOnly: this.props.readOnly,
 				key:1
 			})
 		];

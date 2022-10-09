@@ -101,3 +101,30 @@ export function addObjectsTo(obj, toAddObj) {
 		obj[i].push(toAddObj[i])
 	}
 }
+
+export function forcePowersObjToRenderArray(forcePowersObj){
+	let nameCounter = {}
+	for (let i in forcePowersObj){
+		for (let j in forcePowersObj[i]){
+			if (!(forcePowersObj[i][j]["name"] in nameCounter)){
+				nameCounter[forcePowersObj[i][j]["name"]] = {
+					"tree": i,
+					"name": forcePowersObj[i][j]["name"],
+					"description": forcePowersObj[i][j]["description"],
+					"xpCost": 0,
+					"rank": 0
+				}
+			}
+			nameCounter[forcePowersObj[i][j]["name"]]["xpCost"] += forcePowersObj[i][j]["xpCost"]
+			nameCounter[forcePowersObj[i][j]["name"]]["rank"] += 1
+		}
+	}
+
+	let output = []
+	
+	for (let i in nameCounter) {
+		output.push(nameCounter[i])
+	}
+
+	return output
+}

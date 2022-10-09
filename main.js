@@ -89,6 +89,14 @@ function init(){
 				"value": path.join(__dirname, "defaultCharacter.json"),
 				"UIType": "path"
 			},
+			"forcePowerTreesPath": {
+				"value": path.join(__dirname, "force_power_trees"),
+				"UIType": "path"
+			},
+			"talentTreesPath": {
+				"value": path.join(__dirname, "talentTrees"),
+				"UIType": "path"
+			},
 			"characterSavedPath":{
 				"value": path.join(APP_ROOT_PATH, "saved_characters"),
 				"UIType": "path"
@@ -106,6 +114,14 @@ function init(){
 
 	if (!fs.existsSync(config["characterSavedPath"]["value"])){
 		fs.mkdirSync(config["characterSavedPath"]["value"]);
+	}
+
+	if (!fs.existsSync(config["forcePowerTreesPath"]["value"])){
+		fs.mkdirSync(config["forcePowerTreesPath"]["value"]);
+	}
+
+	if (!fs.existsSync(config["talentTreesPath"]["value"])){
+		fs.mkdirSync(config["talentTreesPath"]["value"]);
 	}
 
 	discordInterface = new DiscordInterface(config['discordToken']["value"])
@@ -150,14 +166,12 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-
-
-
-
 ipcMain.handle("getAllData", async (event) => {
 	return {
 		"characters": await getCharactersFromDisk(),
 		"defaultCharacter": await getDefaultCharacterFromDisk(),
+		"forcePowerTrees": await getForcePowerTreesFromDisk(),
+		"talentTrees": await getTalentTreesFromDisk(),
 	}
 })
 
@@ -258,6 +272,18 @@ function getCharactersFromDisk() {
 	let characterFilenames = getFolderJSONFilenames(config["characterSavedPath"]["value"]);
 	let characters = filenamesToJson(characterFilenames)
 	return characters	
+}
+
+function getForcePowerTreesFromDisk() {
+	let forcePowerTreeFilenames = getFolderJSONFilenames(config["forcePowerTreesPath"]["value"]);
+	let forcePowerTrees = filenamesToJson(forcePowerTreeFilenames)
+	return forcePowerTrees	
+}
+
+function getTalentTreesFromDisk() {
+	let talentTreeFilenames = getFolderJSONFilenames(config["talentTreesPath"]["value"]);
+	let talentTrees = filenamesToJson(talentTreeFilenames)
+	return talentTrees
 }
 
 function writeCharacterToDisk(character) {
