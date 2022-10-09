@@ -12,10 +12,13 @@ export class ForceTreeDataInput extends React.Component{
 			initForcePowers = []
 		}
 
+		let initForceRank = window.data.get(["characters", this.props.characterId, "characteristics", "forceRank", "rank"])
+
 		this.state = {
 			treePath: treePath,
 			treeData: initTreeData,
-			forcePowers: initForcePowers
+			forcePowers: initForcePowers,
+			forceRank: initForceRank
 		}
 
 		this.dataHandler = (path, newValue) => {
@@ -41,6 +44,9 @@ export class ForceTreeDataInput extends React.Component{
 	}
 
 	itemIsEnabled(item) {
+		if (this.state.forceRank < this.state.treeData["requiredRank"]) {
+			return false
+		}
 		if (item["enabledBy"].length == 0){
 			return true
 		}

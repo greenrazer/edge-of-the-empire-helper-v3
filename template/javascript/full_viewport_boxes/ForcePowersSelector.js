@@ -7,6 +7,7 @@ export class ForcePowersSelector extends FullViewportBox {
 
 		this.state.forcePowerTreeSelected = -1
 		this.state.forcePowerTrees = window.data.get(["forcePowerTrees"])
+		this.state.forceRank = window.data.get(["characters", this.props.characterId, "characteristics", "forceRank", "rank"])
 
 		this.handleSelect = this.handleSelect.bind(this)
 	}
@@ -23,7 +24,7 @@ export class ForcePowersSelector extends FullViewportBox {
 		for(let i = 0; i < this.state.forcePowerTrees.length; i++){
 			let elem = React.createElement('div', {style:{position: "relative", height: "50px"},key:i},
 				React.createElement('span', {className:"width-25-percent-float-left"}, this.state.forcePowerTrees[i]["name"]),
-				React.createElement('span', {className:"width-25-percent-float-left"}, "Required Rank: " + this.state.forcePowerTrees[i]["requiredRank"]),
+				React.createElement('span', {className:"width-25-percent-float-left"},  this.state.forceRank < this.state.forcePowerTrees[i]["requiredRank"] ? "Required Rank: " + this.state.forcePowerTrees[i]["requiredRank"]: null),
 				React.createElement('button',{className:"width-25-percent-float-left",onClick:(event) => this.handleSelect(i) }, "Open")
 			)
 			treeNames.push(elem)
