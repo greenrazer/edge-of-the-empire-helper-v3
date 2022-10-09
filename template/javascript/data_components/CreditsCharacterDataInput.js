@@ -9,15 +9,28 @@ export class CreditsCharacterDataInput extends React.Component {
 		let creditsDataPath = ['finances', 'credits']
 		let initCredits = window.data.getPathCurrentCharacter(creditsDataPath)
 
+		let initCreditsBaseUsed = 0
+
+		let creditsUsedDataPath = ['finances', 'creditsUsed']
+		let initCreditsUsed = window.data.getPathCurrentCharacter(creditsUsedDataPath)
+
+		let initCreditsLeft = initCredits - initCreditsBaseUsed - initCreditsUsed
+
 		this.state = {
 			characterDataPath: characterDataPath,
 			creditsDataPath: creditsDataPath,
+			creditsUsedDataPath:creditsUsedDataPath,
+			
 			creditsTotal: initCredits,
-			creditsUsed: 0,
-			creditsLeft: 0,
+			creditsBaseUsed: initCreditsBaseUsed,
+			creditsUsed: initCreditsUsed,
+			creditsLeft: initCreditsLeft,
 		};
 
+		this.setListeners = this.setListeners.bind(this)
 		this.setListeners()
+
+		this.handleChange = this.handleChange.bind(this)
 	}
 
 	setListeners() {
@@ -26,6 +39,7 @@ export class CreditsCharacterDataInput extends React.Component {
 				return
 			}
 			let credits = window.data.getPathCurrentCharacter(this.state.creditsDataPath)
+			let creditsUsed = window.data.getPathCurrentCharacter(this.state.creditsUsedDataPath)
 
 			let creditsCosts = 0
 
@@ -43,48 +57,20 @@ export class CreditsCharacterDataInput extends React.Component {
 				}
 			}
 
-			let gear = window.data.getPathCurrentCharacter(["property", "gear"])
-			for(let object of gear) {
-				creditsCosts += object["quantity"] * object["costPerQuantity"]
-			}
-
-			let other = window.data.getPathCurrentCharacter(["property", "other"])
-			for(let object of other) {
-				creditsCosts += object["quantity"] * object["costPerQuantity"]
-			}
-
 			let cybernetics = window.data.getPathCurrentCharacter(["cybernetics"])
 			for (let cyberName in cybernetics){
 				creditsCosts += cybernetics[cyberName]["cost"]
 			}
 
-			let weapons = window.data.getPathCurrentCharacter(["weapons"])
-			for (let weapon of weapons){
-				creditsCosts += weapon["cost"]
-				for (let attachment of weapon["attachments"]) {
-					creditsCosts += attachment["cost"]
-					for (let modification of attachment["modifications"]){
-						creditsCosts += modification["cost"]
-					}
-				}
-			}
-
-			let armors = window.data.getPathCurrentCharacter(["armor"])
-			for (let armor of armors){
-				creditsCosts += armor["cost"]
-				for (let attachment of armor["attachments"]) {
-					creditsCosts += attachment["cost"]
-					for (let modification of attachment["modifications"]){
-						creditsCosts += modification["cost"]
-					}
-				}
-			}
-
 			this.setState({
 				characterDataPath: ["characters", this.props.characterId],
+				creditsDataPath: ["finances", "credits"],
+				creditsUsedDataPath: ["finances", "creditsUsed"],
+				
 				creditsTotal: credits,
-				creditsUsed: creditsCosts,
-				creditsLeft: credits-creditsCosts,
+				creditsBaseUsed: creditsCosts,
+				creditsUsed: creditsUsed,
+				creditsLeft: credits - creditsCosts - creditsUsed,
 			})
 		};
 
@@ -104,6 +90,17 @@ export class CreditsCharacterDataInput extends React.Component {
 		window.data.removeListener(this.state.characterDataPath, this.dataChangeHandler);
 	}
 
+	handleChange(event) {
+		if (event.target.value == ""){
+			this.setState({
+				value:""
+			})
+		}
+		else{
+			window.data.setPathCurrentCharacter(this.state.creditsUsedDataPath, parseInt(event.target.value) - this.state.creditsBaseUsed)
+		}
+	}
+
 	render() {
 		return React.createElement('div', null,
 			React.createElement('div', {className:"width-33-percent-float-left"},
@@ -112,7 +109,19 @@ export class CreditsCharacterDataInput extends React.Component {
 			),
 			React.createElement('div', {className:"width-33-percent-float-left"},
 				React.createElement('span', null, "Used Credits"),
-				React.createElement('span', null, this.state.creditsUsed),
+				React.createElement("label", {
+					htmlFor: this.props.id,
+					style: {display: "none"}
+				},
+				this.props.name + ":"),
+				React.createElement("input", {
+					className:"credits-xp-input-value",
+					type: "number",
+					min: this.state.creditsBaseUsed,
+					step:1,
+					value: this.state.creditsBaseUsed + this.state.creditsUsed,
+					onChange: this.handleChange,
+				})
 			),
 			React.createElement('div', {className:"width-33-percent-float-left"},
 				React.createElement('span', null, "Left Credits"),

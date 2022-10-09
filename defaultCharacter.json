@@ -429,6 +429,7 @@
 	},
 	"finances": {
 		"credits": 0,
+		"creditsUsed": 0,
 		"owed": [],
 		"debt": []
 	},
