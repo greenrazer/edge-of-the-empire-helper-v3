@@ -479,7 +479,7 @@ input[type=range]::-webkit-slider-thumb {
 .vertically-center{
   margin: 0;
   position: absolute;
-  top: 52%;
+  top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   width: 100%;
@@ -487,14 +487,28 @@ input[type=range]::-webkit-slider-thumb {
   background-color: black;
 }
 
-.vertically-activated-center{
+.vertically-activated-center-left{
   margin: 0;
   position: absolute;
-  top: 52%;
+  top: 50%;
+  left: -100%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  width: 100%;
-  height: 25px;
+  width: 200%;
+  z-index: 1;
+  height: 26px;
+  background-color: gold;
+}
+
+.vertically-activated-center-right{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 200%;
+  z-index: 1;
+  height: 26px;
   background-color: gold;
 }
 
