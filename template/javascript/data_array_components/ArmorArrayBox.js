@@ -119,7 +119,7 @@ export class ArmorArrayBox extends CharacterArrayBox {
 							React.createElement(TextDataCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "special"]), id: this.props.id + i + "-special", name: "Special"}),
 						),
 						React.createElement('div', null,
-						React.createElement('button', {onClick: (event) => this.handleReimburse(event, i)}, "Delete")
+							React.createElement('button', {onClick: (event) => this.handleReimburse(event, i)}, "Delete")
 						),
 						React.createElement('div', null,
 							React.createElement('button', {onClick: (event) => this.handleSell(event, i)}, "Sell")
