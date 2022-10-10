@@ -12,7 +12,6 @@ class DiscordInterface {
 			this.discordConnected = true
 			this.client.on('ready', async () => {
 				console.debug(`Connected to discord as ${this.client.user.username}.`)
-				this.discordConnected = true
 			  this.isReady = true
 			})
 			this.client.login(token).catch((err) => {
