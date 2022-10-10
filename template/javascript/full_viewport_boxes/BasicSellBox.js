@@ -17,6 +17,11 @@ export class BasicSellBox extends FullViewportBox {
 	}
 
 	handleChangeCost(event) {
+		if(event.target.value == ""){
+			this.setState({
+				cost: 0
+			})
+		}
 		this.setState({
 			cost: parseInt(event.target.value)
 		})
