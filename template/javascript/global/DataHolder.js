@@ -68,6 +68,23 @@ export class DataHolder {
 		return this.get(dataPath)
 	}
 
+	add(path, amount) {
+		let currValue = this.get(path)
+		this.set(path, currValue + amount)
+	}
+
+	addPathCurrentCharacter(characterPath, value) {
+		if (this.currCharacterIndex < 0) {
+			var err = new Error();
+			throw `No character currently selected \n ${err.stack}`
+		}
+
+		let pathCopy = JSON.parse(JSON.stringify(characterPath))
+		let dataPath = ["characters", this.currCharacterIndex].concat(pathCopy)
+		
+		return this.add(dataPath, value)
+	}
+
 	setCurrCharacterIndex(index) {
 		this.currCharacterIndex = index
 		this.alertAllListeners(this.SET_CURRENT_CHARACTER)

@@ -62,6 +62,28 @@ export class CreditsCharacterDataInput extends React.Component {
 				creditsCosts += cybernetics[cyberName]["cost"]
 			}
 
+			let weapons = window.data.getPathCurrentCharacter(["weapons"])
+			for (let weapon of weapons){
+				creditsCosts += weapon["cost"]
+				for (let attachment of weapon["attachments"]) {
+					creditsCosts += attachment["cost"]
+					for (let modification of attachment["modifications"]){
+						creditsCosts += modification["cost"]
+					}
+				}
+			}
+
+			let armors = window.data.getPathCurrentCharacter(["armor"])
+			for (let armor of armors){
+				creditsCosts += armor["cost"]
+				for (let attachment of armor["attachments"]) {
+					creditsCosts += attachment["cost"]
+					for (let modification of attachment["modifications"]){
+						creditsCosts += modification["cost"]
+					}
+				}
+			}
+
 			this.setState({
 				characterDataPath: ["characters", this.props.characterId],
 				creditsDataPath: ["finances", "credits"],
@@ -117,7 +139,6 @@ export class CreditsCharacterDataInput extends React.Component {
 				React.createElement("input", {
 					className:"credits-xp-input-value",
 					type: "number",
-					min: this.state.creditsBaseUsed,
 					step:1,
 					value: this.state.creditsBaseUsed + this.state.creditsUsed,
 					onChange: this.handleChange,

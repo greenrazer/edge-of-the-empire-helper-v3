@@ -358,6 +358,12 @@ input[type=range]::-webkit-slider-thumb {
   grid-gap: 10px;
 }
 
+.col-7-grid-last-three-button {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.2fr 0.2fr 0.2fr;
+  grid-gap: 10px;
+}
+
 
 .span-col-twelve-grid-twelfth {
   grid-column: span 1;
@@ -549,4 +555,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 20px;
   height: 100%;
   background-color: gold;
+}
+
+.input-line input {
+  width: 10%;
 }
