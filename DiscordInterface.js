@@ -2,8 +2,6 @@ const { Client } = require('discord.js-selfbot-v13');
 
 class DiscordInterface {
 	constructor(token) {
-		this.onLoginError = onLoginError
-		
 		this.discordConnected = false
 		this.isReady = false
 		this.client = new Client();
