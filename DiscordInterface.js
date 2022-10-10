@@ -1,7 +1,7 @@
 const { Client } = require('discord.js-selfbot-v13');
 
 class DiscordInterface {
-	constructor(token, onLoginError=null) {
+	constructor(token) {
 		this.onLoginError = onLoginError
 		
 		this.discordConnected = false
@@ -14,7 +14,10 @@ class DiscordInterface {
 				console.debug(`Connected to discord as ${this.client.user.username}.`)
 			  this.isReady = true
 			})
-			this.client.login(token).catch(this.onLoginError)
+			this.client.login(token).catch((err) => {
+				console.debug(`Couldn't log in to discord using "${token}"`)
+				this.discordConnected = false
+			})
 		}
 
 	}

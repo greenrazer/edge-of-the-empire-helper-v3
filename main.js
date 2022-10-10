@@ -124,9 +124,7 @@ function init(){
 		fs.mkdirSync(config["talentTreesPath"]["value"]);
 	}
 
-	discordInterface = new DiscordInterface(config['discordToken']["value"], (err) => {
-		console.log("Discord Failed Login.")
-	})
+	discordInterface = new DiscordInterface(config['discordToken']["value"])
 }
 
 function createWindow () {
