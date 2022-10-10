@@ -6,14 +6,21 @@ import {PositiveIntegerCharacterDataInput} from "../data_components/PositiveInte
 import { CharacterArrayBox } from "./CharacterArrayBox.js";
 
 import {GenericAttachmentsArrayBox} from "./GenericAttachmentsArrayBox.js"
+import { BasicSellBox } from "../full_viewport_boxes/BasicSellBox.js";
 
 export class WeaponsArrayBox extends CharacterArrayBox {
 	constructor(props) {
 		super(props)
 
+		this.state.sellIndex = -1
+		this.state.sellName = ""
+
 		this.dataChangeHandler2 = calcCharacterStats
 
 		window.data.addListenerCurrentCharacter(['weapons'], this.dataChangeHandler2);
+
+		this.handleReimburse = this.handleReimburse.bind(this)
+		this.hideSell = this.hideSell.bind(this)
 	}
 
 	componentWillUnmount() {
@@ -38,13 +45,67 @@ export class WeaponsArrayBox extends CharacterArrayBox {
 		}
 	}
 
+	handleReimburse(event, i) {
+		let cost = 0
+		let weapon = window.data.getPathCurrentCharacter(["weapons", i])
+		cost += weapon["cost"]
+		for (let attachment of weapon["attachments"]) {
+			cost += attachment["cost"]
+			for (let modification of attachment["modifications"]){
+				cost += modification["cost"]
+			}
+		}
+
+		window.data.add(["characters", this.state.currCharacter, "finances", "creditsUsed"], cost)
+		this.handleDelete(event, i)
+	}
+
+	handleSell(event, i) {
+		this.setState({
+			sellIndex: i,
+			sellName: window.data.get(["characters", this.state.currCharacter].concat(this.props.characterDataPath.concat([i, "name"])))
+		})
+	}
+
+	hideSell(removed) {
+		if (removed) {
+			this.handleDelete(null, this.state.sellIndex)
+		}
+		this.setState({
+			sellIndex: -1,
+		})
+	}
+
 	getData() {
 		let skills = []
 
 		for (let i = 0; i < this.state.dataLen; i++){
+
+			let buySell = null
+
+			let cost = 0
+			let weapon = window.data.getPathCurrentCharacter(["weapons", i])
+			cost += weapon["cost"]
+			for (let attachment of weapon["attachments"]) {
+				cost += attachment["cost"]
+				for (let modification of attachment["modifications"]){
+					cost += modification["cost"]
+				}
+			}
+
+			if (this.state.sellIndex == i) {
+				buySell = React.createElement(BasicSellBox, {
+					removeSelf: this.hideSell, 
+					characterId: this.state.currCharacter,
+					defaultCost:cost,
+					name: this.state.sellName
+				})
+			}
+
 			skills.push(
 				React.createElement('div', {className:"array-box-row", key: i},
-					React.createElement('div', {className:"col-6-grid-last-button"},
+					buySell,
+					React.createElement('div', {className:"col-7-grid-last-two-button"},
 						React.createElement('div', null,
 							React.createElement(TextDataCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "name"]), id: this.props.id + i + "-name", name: "Name"}),
 						),
@@ -61,7 +122,10 @@ export class WeaponsArrayBox extends CharacterArrayBox {
 							React.createElement(TextDataCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "skill"]), id: this.props.id + i + "-skill", name: "Skill"}),
 						),
 						React.createElement('div', null,
-							React.createElement('button', {onClick: (event) => this.handleDelete(event, i)}, "Delete")
+							React.createElement('button', {onClick: (event) => this.handleReimburse(event, i)}, "Delete")
+						),
+						React.createElement('div', null,
+							React.createElement('button', {onClick: (event) => this.handleSell(event, i)}, "Sell")
 						),
 					),
 					React.createElement('div', {className:"col-7-grid"},
