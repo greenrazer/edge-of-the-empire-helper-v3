@@ -23,24 +23,32 @@ class DiscordInterface {
 		return this.client.token
 	}
 
-	logOut(){
+	logOut(n=100){
 		if(!this.discordConnected){
 			return
 		}
 		if(!this.isReady){
-			setTimeout(() => this.logOut(), 10)
+			if (n > 0){
+				setTimeout(() => this.logOut(n-1), 10)
+				return
+			}
+			this.discordConnected = false
 			return
 		}
 		console.debug(`${this.client.user.username} Disconnecting from Discord...`);
 		return this.client.destroy()
 	}
 
-	sendMessageToChannel(channelId, message){
+	sendMessageToChannel(channelId, message, n=100){
 		if(!this.discordConnected) {
 			return
 		}
 		if(!this.isReady){
-			setTimeout(() => this.sendMessageToChannel(channelId, message), 10)
+			if (n > 0){
+				setTimeout(() => this.sendMessageToChannel(channelId, message, n-1), 10)
+				return
+			}
+			this.discordConnected = false
 			return
 		}
 		console.debug("sent' " + message + "' to " + channelId)
