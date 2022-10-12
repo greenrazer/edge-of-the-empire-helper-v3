@@ -50,7 +50,8 @@
 		"build": "",
 		"notableFeatures": "",
 		"career": "",
-		"specializations": []
+		"specializations": [],
+		"customSpecializations": []
 	},
 	"stats": {
 		"wounds" : {

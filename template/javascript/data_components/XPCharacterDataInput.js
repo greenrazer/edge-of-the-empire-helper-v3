@@ -86,14 +86,41 @@ export class XPCharacterDataInput extends React.Component {
 			let specializationXPDefaultMultiplier = this.state.settings["specializationXP"]["default"]["multiplier"]
 
 			let career = window.data.getPathCurrentCharacter(["base", "career"])
-			let specializations = window.data.getPathCurrentCharacter(["base", "specializations"])
 
+			let specializations = window.data.getPathCurrentCharacter(["base", "specializations"])
 			let skip = 0
+			let curr = 0
 
 			for (let i in specializations){
 				i = parseInt(i)
 				
 				let specializationCareer = specializations[i]["career"]
+				if(specializationCareer == career && skip < 1){
+					skip++
+					continue
+				}
+				let specializationNum = i+1
+				
+				let totXp = 0
+				if(specializationCareer == career) {
+					totXp += specializationXPCareerMultiplier * specializationNum + specializationXPCareerBias
+				}
+				else {
+					totXp += specializationXPDefaultMultiplier * specializationNum + specializationXPDefaultBias
+				}
+
+				xpCosts += totXp
+				curr++;
+			}
+
+			//Custom Specializations
+			
+			let customSpecializations = window.data.getPathCurrentCharacter(["base", "customSpecializations"])
+
+			for (let i in customSpecializations){
+				i = curr + parseInt(i)
+				
+				let specializationCareer = customSpecializations[i]["career"]
 				if(specializationCareer == career && skip < 1){
 					skip++
 					continue
