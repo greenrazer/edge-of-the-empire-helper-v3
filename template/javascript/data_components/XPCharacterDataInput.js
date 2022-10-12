@@ -135,6 +135,12 @@ export class XPCharacterDataInput extends React.Component {
 				}
 			}
 
+			// Custom Force Powers
+			let customForcePowers = window.data.getPathCurrentCharacter(["customForcePowers"])
+			for (let i in customForcePowers) {
+				xpCosts += customForcePowers[i]["xpCost"]
+			}
+
 			this.setState({
 				characterDataPath: ["characters", this.props.characterId],
 				xpTotal: xp,

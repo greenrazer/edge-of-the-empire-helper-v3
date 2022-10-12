@@ -57,6 +57,7 @@ export class TalentsObjectSelectionBox extends React.Component {
 		this.handleChoose = this.handleChoose.bind(this)
 		this.showSelector = this.showSelector.bind(this)
 		this.hideSelector = this.hideSelector.bind(this)
+		this.handleDelete = this.handleDelete.bind(this)
 	}
 
 	componentWillUnmount() {
@@ -205,10 +206,10 @@ export class TalentsObjectSelectionBox extends React.Component {
 						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "career"], name: "Career"}),
 					),
 					React.createElement('div', null,
-						React.createElement(PositiveIntegerCharacterDataInput, {characterDataPath: ["customTalents", i, "ranks"], name: "Ranks"}),
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "description"], name: "Description"}),
 					),
 					React.createElement('div', null,
-						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "description"], name: "Description"}),
+						React.createElement(PositiveIntegerCharacterDataInput, {characterDataPath: ["customTalents", i, "ranks"], name: "Ranks"}),
 					),
 					React.createElement('div', null,
 						React.createElement(PositiveIntegerCharacterDataInput, {characterDataPath: ["customTalents", i, "xpCost"], name: "XP Cost"}),
