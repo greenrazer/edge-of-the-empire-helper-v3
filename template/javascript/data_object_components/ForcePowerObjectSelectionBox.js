@@ -11,7 +11,7 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 		let initData = forcePowersObjToRenderArray(window.data.get(dataPath))
 
 		let customForcePowersDataPath = ["characters", window.data.currCharacterIndex, "customForcePowers"]
-		let initCustomFocePowersData = forcePowersObjToRenderArray(window.data.get(customForcePowersDataPath))
+		let initCustomFocePowersData = window.data.get(customForcePowersDataPath)
 		
 		this.state = {
 			dataPath: dataPath,
