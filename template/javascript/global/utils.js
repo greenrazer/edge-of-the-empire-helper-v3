@@ -128,3 +128,34 @@ export function forcePowersObjToRenderArray(forcePowersObj){
 
 	return output
 }
+
+export function talentsObjToRenderArray(talentsObj) {
+	let nameCounter = {}
+	for (let career in talentsObj){
+		for (let specialization in talentsObj[career]){
+			for(let talent in talentsObj[career][specialization]){
+				let objValue = talentsObj[career][specialization][talent]
+				if (!(objValue["name"] in nameCounter)){
+					nameCounter[objValue["name"]] = {
+						"name": objValue["name"],
+						"specialization": specialization,
+						"career": career,
+						"description": objValue["description"],
+						"xpCost": 0,
+						"rank": 0
+					}
+				}
+				nameCounter[objValue["name"]]["xpCost"] += objValue["xpCost"]
+				nameCounter[objValue["name"]]["rank"] += 1
+			}
+		}
+	}
+
+	let output = []
+	
+	for (let i in nameCounter) {
+		output.push(nameCounter[i])
+	}
+
+	return output
+}

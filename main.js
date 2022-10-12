@@ -94,7 +94,7 @@ function init(){
 				"UIType": "path"
 			},
 			"talentTreesPath": {
-				"value": path.join(__dirname, "talentTrees"),
+				"value": path.join(__dirname, "talent_trees"),
 				"UIType": "path"
 			},
 			"characterSavedPath":{

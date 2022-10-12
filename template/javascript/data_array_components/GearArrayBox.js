@@ -22,6 +22,7 @@ export class GearArrayBox extends CharacterArrayBox {
 	}
 
 	componentWillUnmount() {
+		super.componentWillUnmount()
 		window.data.removeListener(['characters', this.state.currCharacter, 'property', 'gear'], this.dataChangeHandler2);
 	}
 

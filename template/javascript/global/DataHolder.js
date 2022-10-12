@@ -172,6 +172,27 @@ export class DataHolder {
 		this.alertListeners(path, null)
 	}
 
+	removeWithFunction(path, func) {
+		let pathCopy = JSON.parse(JSON.stringify(path))
+		let currData = this.data
+		while (pathCopy.length > 1) {
+			let nextKey = pathCopy.shift()
+			if (nextKey in currData){
+				currData = currData[nextKey]
+			}
+			else {
+				var err = new Error();
+				throw `Could not find path: ${path} in data: \n ${err.stack}`
+			}
+		}
+
+		let nextKey = pathCopy.shift()
+		let at = currData[nextKey].findIndex(func)
+		currData[nextKey].splice(at, 1)
+
+		this.alertListeners(path, null)
+	}
+
 	deleteCharacter(id) {
 		if (0 <= id && id < this.data["characters"].length){
 			this.data["characters"].splice(id, 1)

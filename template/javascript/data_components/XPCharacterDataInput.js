@@ -80,40 +80,40 @@ export class XPCharacterDataInput extends React.Component {
 
 			//Specializations
 
-			let specializationXPCareerBias = this.state.settings["specializationXP"]["career"]["bias"]
-			let specializationXPCareerMultiplier = this.state.settings["specializationXP"]["career"]["multiplier"]
-			let specializationXPDefaultBias = this.state.settings["specializationXP"]["default"]["bias"]
-			let specializationXPDefaultMultiplier = this.state.settings["specializationXP"]["default"]["multiplier"]
+			// let specializationXPCareerBias = this.state.settings["specializationXP"]["career"]["bias"]
+			// let specializationXPCareerMultiplier = this.state.settings["specializationXP"]["career"]["multiplier"]
+			// let specializationXPDefaultBias = this.state.settings["specializationXP"]["default"]["bias"]
+			// let specializationXPDefaultMultiplier = this.state.settings["specializationXP"]["default"]["multiplier"]
 
-			let career = window.data.getPathCurrentCharacter(["base", "career"])
-			let specializations = window.data.getPathCurrentCharacter(["base", "specializations"])
+			// let career = window.data.getPathCurrentCharacter(["base", "career"])
+			// let specializations = window.data.getPathCurrentCharacter(["base", "specializations"])
 
-			for (let i in specializations){
-				i = parseInt(i)
-				if(i == 0){
-					continue
-				}
+			// for (let i in specializations){
+			// 	i = parseInt(i)
+			// 	if(i == 0){
+			// 		continue
+			// 	}
 
-				let specializationCareer = specializations[i]["career"]
-				let specializationNum = i+1
+			// 	let specializationCareer = specializations[i]["career"]
+			// 	let specializationNum = i+1
 				
-				let totXp = 0
-				if(specializationCareer == career) {
-					totXp += specializationXPCareerMultiplier * specializationNum + specializationXPCareerBias
-				}
-				else {
-					totXp += specializationXPDefaultMultiplier * specializationNum + specializationXPDefaultBias
-				}
+			// 	let totXp = 0
+			// 	if(specializationCareer == career) {
+			// 		totXp += specializationXPCareerMultiplier * specializationNum + specializationXPCareerBias
+			// 	}
+			// 	else {
+			// 		totXp += specializationXPDefaultMultiplier * specializationNum + specializationXPDefaultBias
+			// 	}
 
-				xpCosts += totXp
-			}
+			// 	xpCosts += totXp
+			// }
 
 			// Talents
-			let talents = window.data.getPathCurrentCharacter(["talents"])
+			// let talents = window.data.getPathCurrentCharacter(["talents"])
 
-			for (let i in talents){
-				xpCosts += talents[i]["cost"]
-			}
+			// for (let i in talents){
+			// 	xpCosts += talents[i]["cost"]
+			// }
 
 			// Force Powers
 			let forcePowers = window.data.getPathCurrentCharacter(["forcePowers"])

@@ -354,7 +354,8 @@
 			"characteristic": "intellect"
 		}
 	],
-	"talents": [],
+	"talents":{},
+	"customTalents": [],
 	"forcePowers": {},
 	"customForcePowers": [],
 	"character": {

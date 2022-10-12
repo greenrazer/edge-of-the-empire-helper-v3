@@ -307,6 +307,13 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 100%;
 }
 
+.col-2-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 93%;  
+}
+
 .col-6-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

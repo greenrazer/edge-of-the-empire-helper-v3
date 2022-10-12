@@ -1,12 +1,12 @@
-import { ForcePowersSelector } from "../full_viewport_boxes/ForcePowersSelector.js";
-import { forcePowersObjToRenderArray } from "../global/utils.js";
+import { TalentsSelector } from "../full_viewport_boxes/TalentsSelector.js";
+import { talentsObjToRenderArray } from "../global/utils.js";
 
-export class ForcePowerObjectSelectionBox extends React.Component {
+export class TalentsObjectSelectionBox extends React.Component {
 	constructor(props) {
 		super(props)
 
-		let dataPath = ["characters", window.data.currCharacterIndex, "forcePowers"]
-		let initData = forcePowersObjToRenderArray(window.data.get(dataPath))
+		let dataPath = ["characters", window.data.currCharacterIndex, "talents"]
+		let initData = talentsObjToRenderArray(window.data.get(dataPath))
 		
 		this.state = {
 			dataPath: dataPath,
@@ -17,20 +17,20 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 		this.dataChangeHandler = (path, newValue) => {
 			if (path.length === 0) {
 				if (newValue === window.data.ALL_DATA_CHANGED || newValue === window.data.SET_CURRENT_CHARACTER || newValue === window.data.FORCE_UPDATE){
-					let dp = ["characters", window.data.currCharacterIndex, "forcePowers"]
+					let dp = ["characters", window.data.currCharacterIndex, "talents"]
 					window.data.removeListener(this.state.dataPath, this.dataChangeHandler);
 					if (window.data.has(dp)){
 						window.data.addListener(dp, this.dataChangeHandler)
 						this.setState({
 							dataPath: dp,
-							renderArray: forcePowersObjToRenderArray(window.data.get(dp)),
+							renderArray: talentsObjToRenderArray(window.data.get(dp)),
 						})
 					}
 				}
 			}
 			else {
 				this.setState({
-					renderArray: forcePowersObjToRenderArray(window.data.get(this.state.dataPath))
+					renderArray: talentsObjToRenderArray(window.data.get(this.state.dataPath))
 				})
 			}
 		};
@@ -69,16 +69,16 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 
 	getInner() {
 		if (this.state.selectorVisible) {
-			return React.createElement(ForcePowersSelector, {
+			return React.createElement(TalentsSelector, {
 				removeSelf: this.hideSelector,
 				characterId: this.state.currCharacter
 			})
 		}
 
-		let forcePowers = []
+		let talents = []
 
 		for (let i in this.state.renderArray){
-			forcePowers.push(
+			talents.push(
 				React.createElement('div', {className:"col-6-grid-last-button array-box-row",key: i},
 					React.createElement('div', null,
 						React.createElement("label", {
@@ -94,13 +94,25 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 					),
 					React.createElement('div', null,
 						React.createElement("label", {
-							htmlFor: this.props.id + "-" + i + "-" + 'tree',
-						},"Tree:"),
+							htmlFor: this.props.id + "-" + i + "-" + 'specialization',
+						},"Specialization:"),
 						React.createElement("input", {
-							name: this.props.id + "-" + i + "-" + 'tree',
-							id: this.props.id + "-" + i + "-" + 'tree',
+							name: this.props.id + "-" + i + "-" + 'specialization',
+							id: this.props.id + "-" + i + "-" + 'specialization',
 							type: "text",
-							value: this.state.renderArray[i]["tree"],
+							value: this.state.renderArray[i]["specialization"],
+							readOnly: true,
+						})
+					),
+					React.createElement('div', null,
+						React.createElement("label", {
+							htmlFor: this.props.id + "-" + i + "-" + 'career',
+						},"Career:"),
+						React.createElement("input", {
+							name: this.props.id + "-" + i + "-" + 'career',
+							id: this.props.id + "-" + i + "-" + 'career',
+							type: "text",
+							value: this.state.renderArray[i]["career"],
 							readOnly: true,
 						})
 					),
@@ -148,7 +160,7 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 			)
 		}
 
-		return forcePowers
+		return talents
 	}
 
 	render() {

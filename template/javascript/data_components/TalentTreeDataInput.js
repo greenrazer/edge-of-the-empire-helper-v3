@@ -1,42 +1,44 @@
-export class ForceTreeDataInput extends React.Component{
+export class TalentTreeDataInput extends React.Component{
 	constructor(props){
 		super(props)
 		
-		let treePath = ["forcePowerTrees", props.treeId]
+		let treePath = ["talentTrees", props.treeId]
 		let initTreeData = window.data.get(treePath)
-		let initForcePowers;
-		if (window.data.has(["characters", this.props.characterId, "forcePowers", initTreeData["name"]])){
-			initForcePowers = window.data.get(["characters", this.props.characterId, "forcePowers", initTreeData["name"]])
+		let initTalents;
+		if (window.data.has(["characters", this.props.characterId, "talents", initTreeData["career"], initTreeData["specialization"]])){
+			initTalents = window.data.get(["characters", this.props.characterId, "talents", initTreeData["career"], initTreeData["specialization"]])
 		}
 		else {
-			initForcePowers = []
+			initTalents = []
 		}
 
-		let initForceRank = window.data.get(["characters", this.props.characterId, "characteristics", "forceRank", "rank"])
+		let hasSpecialization = window.data.get(["characters", this.props.characterId, "base", "specializations"]).map((val) => val["name"]).includes(initTreeData["specialization"])
 
 		this.state = {
 			treePath: treePath,
 			treeData: initTreeData,
-			forcePowers: initForcePowers,
-			forceRank: initForceRank
+			talents: initTalents,
+			hasSpecialization: hasSpecialization
 		}
 
 		this.dataHandler = (path, newValue) => {
-			let forcePowers;
-
-			if (window.data.has(["characters", this.props.characterId, "forcePowers", this.state.treeData["name"]])){
-				forcePowers = window.data.get(["characters", this.props.characterId, "forcePowers", this.state.treeData["name"]])
+			let talents;
+			if (window.data.has(["characters", this.props.characterId, "talents", this.state.treeData["career"], this.state.treeData["specialization"]])){
+				talents = window.data.get(["characters", this.props.characterId, "talents", this.state.treeData["career"], this.state.treeData["specialization"]])
 			}
 			else {
-				forcePowers = []
+				talents = []
 			}
 
+			let hasSpecialization = window.data.get(["characters", this.props.characterId, "base", "specializations"]).map((val) => val["name"]).includes(this.state.treeData["specialization"])
 			this.setState({
-				forcePowers: forcePowers
+				talents: talents,
+				hasSpecialization: hasSpecialization
 			})
 		}
 
-		window.data.addListener(["characters", this.props.characterId, "forcePowers"], this.dataHandler)
+		window.data.addListener(["characters", this.props.characterId, "talents"], this.dataHandler)
+		window.data.addListener(["characters", this.props.characterId, "base", "specializations"], this.dataHandler)
 
 		this.itemIsEnabled = this.itemIsEnabled.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -44,18 +46,19 @@ export class ForceTreeDataInput extends React.Component{
 	}
 
 	componentWillUnmount() {
-		window.data.removeListener(["characters", this.props.characterId, "forcePowers"], this.dataHandler)
+		window.data.removeListener(["characters", this.props.characterId, "talents"], this.dataHandler)
+		window.data.removeListener(["characters", this.props.characterId, "base", "specializations"], this.dataHandler)
 	}
 
 	itemIsEnabled(item) {
-		if (this.state.forceRank < this.state.treeData["requiredRank"]) {
+		if (!this.state.hasSpecialization) {
 			return false
 		}
 		if (item["enabledBy"].length == 0){
 			return true
 		}
 		for(let itemId in item["enabledBy"]){
-			let hasItem = this.state.forcePowers.findIndex((element) => element["id"] == item["enabledBy"][itemId])
+			let hasItem = this.state.talents.findIndex((element) => element["id"] == item["enabledBy"][itemId])
 			if (hasItem != -1){
 				return true
 			}
@@ -64,14 +67,18 @@ export class ForceTreeDataInput extends React.Component{
 	}
 
 	characterHasItem(itemId) {
-		let index = this.state.forcePowers.findIndex((element) => element["id"] == itemId)
+		let index = this.state.talents.findIndex((element) => element["id"] == itemId)
 		return index >= 0
 	}
 
 	handleChange(event, itemId, item){
-		let characterTreeDataPath = ["characters", this.props.characterId, "forcePowers", this.state.treeData["name"]]
+		let characterCareerDataPath = ["characters", this.props.characterId, "talents", this.state.treeData["career"]]
+		let characterTreeDataPath = ["characters", this.props.characterId, "talents", this.state.treeData["career"], this.state.treeData["specialization"]]
 
 		if(event.target.checked) {
+			if (!window.data.has(characterCareerDataPath)){
+				window.data.set(characterCareerDataPath, {})
+			}
 			if (!window.data.has(characterTreeDataPath)){
 				window.data.set(characterTreeDataPath, [])
 			}
@@ -83,8 +90,8 @@ export class ForceTreeDataInput extends React.Component{
 			})
 		}
 		else {
-			if (window.data.has(characterTreeDataPath)){
-				let index = this.state.forcePowers.findIndex((element) => element["id"] == itemId)
+			if (window.data.has(characterCareerDataPath) && window.data.has(characterTreeDataPath)){
+				let index = this.state.talents.findIndex((element) => element["id"] == itemId)
 				if (index >= 0){
 					window.data.remove(characterTreeDataPath, index)
 				}

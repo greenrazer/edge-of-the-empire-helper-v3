@@ -24,6 +24,7 @@ export class ArmorArrayBox extends CharacterArrayBox {
 	}
 
 	componentWillUnmount() {
+		super.componentWillUnmount()
 		window.data.removeListener(['characters', this.state.currCharacter, 'armor'], this.dataChangeHandler2);
 	}
 
