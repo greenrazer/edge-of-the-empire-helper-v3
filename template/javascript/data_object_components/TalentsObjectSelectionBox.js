@@ -1,3 +1,5 @@
+import { PositiveIntegerCharacterDataInput } from "../data_components/PositiveIntegerCharacterDataInput.js";
+import { TextDataCharacterDataInput } from "../data_components/TextDataCharacterDataInput.js";
 import { TalentsSelector } from "../full_viewport_boxes/TalentsSelector.js";
 import { talentsObjToRenderArray } from "../global/utils.js";
 
@@ -8,9 +10,14 @@ export class TalentsObjectSelectionBox extends React.Component {
 		let dataPath = ["characters", window.data.currCharacterIndex, "talents"]
 		let initData = talentsObjToRenderArray(window.data.get(dataPath))
 		
+		let customTalentsDataPath = ["characters", window.data.currCharacterIndex, "customTalents"]
+		let customTalentsArray = window.data.get(customTalentsDataPath)
+
 		this.state = {
 			dataPath: dataPath,
 			renderArray: initData,
+			customTalentsDataPath:customTalentsDataPath,
+			customTalentsArray:customTalentsArray,
 			currCharacter: window.data.currCharacterIndex,
 		};
 
@@ -34,7 +41,16 @@ export class TalentsObjectSelectionBox extends React.Component {
 				})
 			}
 		};
+
+		this.dataChangeHandler2 = (path, newValue) => {
+			this.setState({
+				customTalentsArray:window.data.get(customTalentsDataPath)
+			})
+			
+		}
+
 		window.data.addListener(dataPath, this.dataChangeHandler)
+		window.data.addListener(customTalentsDataPath, this.dataChangeHandler2)
 
 		this.state.selectorVisible = false
 		this.handleCustom = this.handleCustom.bind(this)
@@ -45,10 +61,18 @@ export class TalentsObjectSelectionBox extends React.Component {
 
 	componentWillUnmount() {
 		window.data.removeListener(this.state.dataPath, this.dataChangeHandler)
+		window.data.removeListener(this.state.customTalentsDataPath, this.dataChangeHandler2)
 	}
 
 	handleCustom(event) {
-
+		window.data.push(this.state.customTalentsDataPath, {
+				"name": "",
+				"specialization": "",
+				"career" : "",
+				"ranks": 0,
+				"description": "",
+				"xpCost":0
+		})
 	}
 
 	handleChoose(event) {
@@ -67,6 +91,11 @@ export class TalentsObjectSelectionBox extends React.Component {
 		})
 	}
 
+	handleDelete(event, i) {
+		window.data.remove(this.state.customTalentsDataPath, i)
+		window.data.alertAllListenersBelow(this.state.customTalentsDataPath)
+	}
+
 	getInner() {
 		if (this.state.selectorVisible) {
 			return React.createElement(TalentsSelector, {
@@ -77,9 +106,11 @@ export class TalentsObjectSelectionBox extends React.Component {
 
 		let talents = []
 
+		let k = 0
+
 		for (let i in this.state.renderArray){
 			talents.push(
-				React.createElement('div', {className:"col-6-grid-last-button array-box-row",key: i},
+				React.createElement('div', {className:"col-6-grid array-box-row",key: i},
 					React.createElement('div', null,
 						React.createElement("label", {
 							htmlFor: this.props.id + "-" + i + "-" + 'name',
@@ -158,6 +189,36 @@ export class TalentsObjectSelectionBox extends React.Component {
 					),
 				)
 			)
+			k++;
+		}
+
+		for (let i in this.state.customTalentsArray){
+			talents.push(
+				React.createElement('div', {className:"col-7-grid-last-button array-box-row",key: k},
+					React.createElement('div', null,
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "name"], name: "Name"}),
+					),
+					React.createElement('div', null,
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "specialization"], name: "Specialization"}),
+					),
+					React.createElement('div', null,
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "career"], name: "Career"}),
+					),
+					React.createElement('div', null,
+						React.createElement(PositiveIntegerCharacterDataInput, {characterDataPath: ["customTalents", i, "ranks"], name: "Ranks"}),
+					),
+					React.createElement('div', null,
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customTalents", i, "description"], name: "Description"}),
+					),
+					React.createElement('div', null,
+						React.createElement(PositiveIntegerCharacterDataInput, {characterDataPath: ["customTalents", i, "xpCost"], name: "XP Cost"}),
+					),
+					React.createElement('div', null,
+						React.createElement('button', {onClick: (event) => this.handleDelete(event, i)}, "Delete")
+					)
+				)
+			)
+			k++;
 		}
 
 		return talents

@@ -1,7 +1,6 @@
 { 
 	"career": "test1",
 	"specialization":"Move",
-	"requiredRank": 1,
 	"careerSkills": [],
 	"bonusSkills": [],
 	"items":{

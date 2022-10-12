@@ -121,6 +121,12 @@ export class XPCharacterDataInput extends React.Component {
 				}
 			}
 
+			// Custom Talents
+			let customTalents = window.data.getPathCurrentCharacter(["customTalents"])
+			for (let i in customTalents) {
+				xpCosts += customTalents[i]["xpCost"]
+			}
+
 			// Force Powers
 			let forcePowers = window.data.getPathCurrentCharacter(["forcePowers"])
 			for (let treeName in forcePowers){

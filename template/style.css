@@ -365,6 +365,12 @@ input[type=range]::-webkit-slider-thumb {
   grid-gap: 10px;
 }
 
+.col-7-grid-last-button{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) 0.2fr;
+  grid-gap: 10px;
+}
+
 .col-7-grid-last-two-button{
   display: grid;
   grid-template-columns: repeat(5, 1fr) 0.2fr 0.2fr;
