@@ -1,11 +1,11 @@
 { 
-	"career": "test1",
+	"career": "test2",
 	"specialization":"Move",
 	"careerSkills": ["Astrogation"],
 	"bonusSkills": ["Athletics"],
 	"items":{
 		"movebasicpower": {
-			"name": "Move Basic Power 3",
+			"name": "Move Basic Power2",
 			"xpCost": 10,
 			"description": "test",
 			"enabledBy": []

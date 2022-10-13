@@ -45,6 +45,30 @@ export class TalentTreeDataInput extends React.Component{
 		this.characterHasItem = this.characterHasItem.bind(this)
 	}
 
+	componentDidUpdate(prevProps) {
+		if (!(prevProps.treeId == this.props.treeId)){
+			let treePath = ["talentTrees", this.props.treeId]
+			let treeData = window.data.get(treePath)
+
+			let talents;
+			if (window.data.has(["characters", this.props.characterId, "talents", treeData["career"], treeData["specialization"]])){
+				talents = window.data.get(["characters", this.props.characterId, "talents", treeData["career"], treeData["specialization"]])
+			}
+			else {
+				talents = []
+			}
+
+			let hasSpecialization = window.data.get(["characters", this.props.characterId, "base", "specializations"]).map((val) => val["name"]).includes(treeData["specialization"])
+
+			this.setState({
+				treePath: treePath,
+				treeData: treeData,
+				talents: talents,
+				hasSpecialization: hasSpecialization
+			})
+		}
+	}
+
 	componentWillUnmount() {
 		window.data.removeListener(["characters", this.props.characterId, "talents"], this.dataHandler)
 		window.data.removeListener(["characters", this.props.characterId, "base", "specializations"], this.dataHandler)

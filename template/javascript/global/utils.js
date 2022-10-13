@@ -106,17 +106,19 @@ export function forcePowersObjToRenderArray(forcePowersObj){
 	let nameCounter = {}
 	for (let i in forcePowersObj){
 		for (let j in forcePowersObj[i]){
-			if (!(forcePowersObj[i][j]["name"] in nameCounter)){
-				nameCounter[forcePowersObj[i][j]["name"]] = {
+			let objValue = forcePowersObj[i][j]
+			let key = `${i}-${objValue["name"]}`
+			if (!(key in nameCounter)){
+				nameCounter[key] = {
 					"tree": i,
-					"name": forcePowersObj[i][j]["name"],
-					"description": forcePowersObj[i][j]["description"],
+					"name": objValue["name"],
+					"description": objValue["description"],
 					"xpCost": 0,
 					"rank": 0
 				}
 			}
-			nameCounter[forcePowersObj[i][j]["name"]]["xpCost"] += forcePowersObj[i][j]["xpCost"]
-			nameCounter[forcePowersObj[i][j]["name"]]["rank"] += 1
+			nameCounter[key]["xpCost"] += objValue["xpCost"]
+			nameCounter[key]["rank"] += 1
 		}
 	}
 
@@ -135,8 +137,9 @@ export function talentsObjToRenderArray(talentsObj) {
 		for (let specialization in talentsObj[career]){
 			for(let talent in talentsObj[career][specialization]){
 				let objValue = talentsObj[career][specialization][talent]
-				if (!(objValue["name"] in nameCounter)){
-					nameCounter[objValue["name"]] = {
+				let key = `${career}-${specialization}-${objValue["name"]}`
+				if (!(key in nameCounter)){
+					nameCounter[key] = {
 						"name": objValue["name"],
 						"specialization": specialization,
 						"career": career,
@@ -145,8 +148,8 @@ export function talentsObjToRenderArray(talentsObj) {
 						"rank": 0
 					}
 				}
-				nameCounter[objValue["name"]]["xpCost"] += objValue["xpCost"]
-				nameCounter[objValue["name"]]["rank"] += 1
+				nameCounter[key]["xpCost"] += objValue["xpCost"]
+				nameCounter[key]["rank"] += 1
 			}
 		}
 	}

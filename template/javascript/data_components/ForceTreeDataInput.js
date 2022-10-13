@@ -43,6 +43,26 @@ export class ForceTreeDataInput extends React.Component{
 		this.characterHasItem = this.characterHasItem.bind(this)
 	}
 
+	componentDidUpdate(prevProps) {
+		if (!(prevProps.treeId == this.props.treeId)){
+			let treePath = ["forcePowerTrees", this.props.treeId]
+			let treeData = window.data.get(treePath)
+			let forcePowers;
+			if (window.data.has(["characters", this.props.characterId, "forcePowers", treeData["name"]])){
+				forcePowers = window.data.get(["characters", this.props.characterId, "forcePowers", treeData["name"]])
+			}
+			else {
+				forcePowers = []
+			}
+
+			this.setState({
+				treePath: treePath,
+				treeData: treeData,
+				forcePowers: forcePowers,
+			})
+		}
+	}
+
 	componentWillUnmount() {
 		window.data.removeListener(["characters", this.props.characterId, "forcePowers"], this.dataHandler)
 	}
