@@ -1,8 +1,8 @@
 { 
 	"career": "test1",
 	"specialization":"Move",
-	"careerSkills": [],
-	"bonusSkills": [],
+	"careerSkills": ["Astrogation"],
+	"bonusSkills": ["Athletics"],
 	"items":{
 		"movebasicpower": {
 			"name": "Move Basic Power",

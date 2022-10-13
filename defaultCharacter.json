@@ -148,211 +148,281 @@
 			"name": "Astrogation",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Athletics",
 			"career": false,
 			"rank": 0,
-			"characteristic": "brawn"
+			"characteristic": "brawn",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Charm",
 			"career": false,
 			"rank": 0,
-			"characteristic": "presence"
+			"characteristic": "presence",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Coercion",
 			"career": false,
 			"rank": 0,
-			"characteristic": "willpower"
+			"characteristic": "willpower",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Computers",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Cool",
 			"career": false,
 			"rank": 0,
-			"characteristic": "presence"
+			"characteristic": "presence",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Coordination",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Deception",
 			"career": false,
 			"rank": 0,
-			"characteristic": "cunning"
+			"characteristic": "cunning",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Discipline",
 			"career": false,
 			"rank": 0,
-			"characteristic": "willpower"
+			"characteristic": "willpower",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Leadership",
 			"career": false,
 			"rank": 0,
-			"characteristic": "presence"
+			"characteristic": "presence",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Mechanics",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Medicine",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Negotiation",
 			"career": false,
 			"rank": 0,
-			"characteristic": "presence"
+			"characteristic": "presence",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Perception",
 			"career": false,
 			"rank": 0,
-			"characteristic": "cunning"
+			"characteristic": "cunning",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Piloting Planetary",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Piloting Space",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Resilience",
 			"career": false,
 			"rank": 0,
-			"characteristic": "brawn"
+			"characteristic": "brawn",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Skulduggery",
 			"career": false,
 			"rank": 0,
-			"characteristic": "cunning"
+			"characteristic": "cunning",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Stealth",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Streetwise",
 			"career": false,
 			"rank": 0,
-			"characteristic": "cunning"
+			"characteristic": "cunning",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Survival",
 			"career": false,
 			"rank": 0,
-			"characteristic": "cunning"
+			"characteristic": "cunning",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Vigilance",
 			"career": false,
 			"rank": 0,
-			"characteristic": "willpower"
+			"characteristic": "willpower",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Brawl",
 			"career": false,
 			"rank": 0,
-			"characteristic": "brawn"
+			"characteristic": "brawn",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Lightsaber",
 			"career": false,
 			"rank": 0,
-			"characteristic": "brawn"
+			"characteristic": "brawn",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Melee",
 			"career": false,
 			"rank": 0,
-			"characteristic": "brawn"
+			"characteristic": "brawn",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Gunnery",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Ranged Light",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Ranged Heavy",
 			"career": false,
 			"rank": 0,
-			"characteristic": "agility"
+			"characteristic": "agility",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Core Worlds",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Education",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Lore",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Outer Rim",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Underworld",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Warfare",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		},
 		{
 			"name": "Xenology",
 			"career": false,
 			"rank": 0,
-			"characteristic": "intellect"
+			"characteristic": "intellect",
+			"careerRank":0,
+			"careerActivatorCount":0
 		}
 	],
 	"talents":{},

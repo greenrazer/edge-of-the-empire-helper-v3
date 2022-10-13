@@ -1,10 +1,10 @@
 import {TextDataCharacterDataInput} from "../data_components/TextDataCharacterDataInput.js";
-import {CheckboxCharacterDataInput} from "../data_components/CheckboxCharacterDataInput.js";
 import {SelectCharacterDataInput} from "../data_components/SelectCharacterDataInput.js";
-import {RankCharacterDataInput} from "../data_components/RankCharacterDataInput.js";
 import {DiceCharacterDataReader} from "../data_components/DiceCharacterDataReader.js";
 import { CharacterArrayBox } from "./CharacterArrayBox.js";
 import { RollBox } from "../full_viewport_boxes/RollBox.js";
+import { CareerRankCharacterDataInput } from "../data_components/CarrerRankCharacterDataInput.js";
+import { BaseRankCharacterDataInput } from "../data_components/BaseRankCharacterDataInput.js";
 
 export class SkillsArrayBox extends CharacterArrayBox {
 
@@ -13,8 +13,26 @@ export class SkillsArrayBox extends CharacterArrayBox {
 
 		this.state.showDiceRollIndex = -1
 
+		this.state.skillsDataPath = ["characters", window.data.currCharacterIndex].concat(this.props.characterDataPath)
+		this.state.skills = window.data.get(this.state.skillsDataPath)
+
+		this.dataChangeHandler2 = (path, newValue) => {
+			this.setState({
+				skills: window.data.get(this.state.skillsDataPath)
+			})
+		}
+
+		window.data.addListener(this.state.skillsDataPath, this.dataChangeHandler2)
+
 		this.handleRoll = this.handleRoll.bind(this)
 		this.hideRollBox = this.hideRollBox.bind(this)
+		this.isCareer = this.isCareer.bind(this)
+		this.handleChangeCareer = this.handleChangeCareer.bind(this)
+	}
+
+	componentWillUnmount() {
+		super.componentWillUnmount()
+		window.data.removeListener(this.state.skillsDataPath, this.dataChangeHandler2)
 	}
 
 	defaultData() {
@@ -22,7 +40,9 @@ export class SkillsArrayBox extends CharacterArrayBox {
 			"name": "",
 			"career": false,
 			"rank": 0,
-			"characteristic": ""
+			"characteristic": "",
+			"careerRank":0,
+			"careerActivatorCount":0,
 		}
 	}
 
@@ -36,6 +56,23 @@ export class SkillsArrayBox extends CharacterArrayBox {
 		this.setState({
 			showDiceRollIndex: -1
 		})
+	}
+
+	isCareer(i) {
+		if (this.state.skills[i]["careerActivatorCount"] > 0){
+			return true
+		}
+
+		return this.state.skills[i]["career"]
+
+	}
+
+	handleChangeCareer(event, i) {
+		if (this.state.skills[i]["careerActivatorCount"] > 0){
+			return
+		}
+
+		window.data.set(this.state.skillsDataPath.concat([i, "career"]), event.target.checked)
 	}
 
 	getData() {
@@ -74,10 +111,21 @@ export class SkillsArrayBox extends CharacterArrayBox {
 						React.createElement(SelectCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "characteristic"]), id: this.props.id + i + "-characteristic", name: "Characteristic", values: {"brawn": "Br","agility": "Ag","intellect": "Int","cunning": "Cun","willpower": "Will","presence": "Pr","forceRank": "Fr"}}),
 					),
 					React.createElement('div', null,
-						React.createElement(CheckboxCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "career"]), id: this.props.id + i + "-career", name: "Career"}),
+						React.createElement("label", {
+							htmlFor: this.props.id + i + "-career",
+							style: {display: this.props.hideLabel ? "none": ""}
+						},
+						"Career :"),
+						React.createElement("input", {
+							name: this.props.id + i + "-career",
+							id: this.props.id + i + "-career",
+							type: "checkbox",
+							checked: this.isCareer(i),
+							onChange: (event) => this.handleChangeCareer(event, i),
+						})
 					),
 					React.createElement('div', null,
-						React.createElement(RankCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "rank"]), id: this.props.id + i + "-rank", name: "Rank"}),
+						this.isCareer(i) ? React.createElement(CareerRankCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "careerRank"]), id: this.props.id + i + "-rank", name: "Rank"}) : React.createElement(BaseRankCharacterDataInput, {characterDataPath: this.props.characterDataPath.concat([i, "rank"]), characterDataPath2: this.props.characterDataPath.concat([i, "careerRank"]), id: this.props.id + i + "-rank", name: "Rank"}),
 					),
 					React.createElement('div', null,
 						React.createElement(DiceCharacterDataReader, {characterDataPath: this.props.characterDataPath.concat([i]), id: this.props.id + i + "-dice", name: "Dice"}),

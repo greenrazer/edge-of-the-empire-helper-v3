@@ -63,19 +63,22 @@ export class XPCharacterDataInput extends React.Component {
 
 			for (let skillName in skills){
 				let skillRank = skills[skillName]["rank"]
+				let careerSkillRank = skills[skillName]["careerRank"]
 
 				let totXp = skillRank*(skillRank + 1)/2
-				let skillCareer = skills[skillName]["career"]
-				if(skillCareer) {
-					totXp *= skillRankXpCareerMultiplier
-					totXp += skillRankXpCareerBias * skillRank
-				}
-				else {
-					totXp *= skillRankXpDefaultMultiplier
-					totXp += skillRankXpDefaultBias * skillRank
-				}
+				totXp *= skillRankXpDefaultMultiplier
+				totXp += skillRankXpDefaultBias * skillRank
+				
+				
+				let totCareerSkillXpA = careerSkillRank*(careerSkillRank + 1)/2
+				totCareerSkillXpA *= skillRankXpCareerMultiplier
+				totCareerSkillXpA += skillRankXpCareerBias * careerSkillRank
 
-				xpCosts += totXp
+				let totCareerSkillXpB = skillRank*(skillRank + 1)/2
+				totCareerSkillXpB *= skillRankXpCareerMultiplier
+				totCareerSkillXpB += skillRankXpCareerBias * skillRank
+
+				xpCosts += totXp + (totCareerSkillXpA - totCareerSkillXpB)
 			}
 
 			//Specializations
@@ -114,7 +117,7 @@ export class XPCharacterDataInput extends React.Component {
 			}
 
 			//Custom Specializations
-			
+
 			let customSpecializations = window.data.getPathCurrentCharacter(["base", "customSpecializations"])
 
 			for (let i in customSpecializations){

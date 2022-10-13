@@ -23,6 +23,8 @@ export class TalentsSelector extends FullViewportBox {
 
 		this.state.selectedSpecializationsPath = ["characters", this.props.characterId, "base", "specializations"]
 		this.state.selectedSpecializations = window.data.get(this.state.selectedSpecializationsPath)
+		
+		this.state.skillsPath = ["characters", this.props.characterId, "skills"]
 
 		this.dataHandler = (path, newValue) => {
 			this.setState({
@@ -72,10 +74,43 @@ export class TalentsSelector extends FullViewportBox {
 	}
 
 	handleSelectCareer(event, i) {
+		let skills = window.data.get(this.state.skillsPath)
+		
+		let oldCareerTreeIndex = this.state.talentTrees.findIndex((value) => value["career"] == this.state.selectedCareer)
+		if (oldCareerTreeIndex > -1){
+			let oldCareerTree = this.state.talentTrees[oldCareerTreeIndex]
+			for (let careerSkill in oldCareerTree["careerSkills"]){
+				let skillName = oldCareerTree["careerSkills"][careerSkill]
+				let skillAddIndex = skills.findIndex((value) => value["name"] == skillName)
+				if (window.data.has(this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"]))) {
+					window.data.add(this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"]), -1)
+				}
+				else {
+					throw new Error(`${this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"])} not in data`)
+				}
+			}
+		}
+
+		let newCareerTreeIndex = this.state.talentTrees.findIndex((value) => value["career"] == this.state.careerNames[i])
+		if (newCareerTreeIndex > -1){
+			let newCareerTree = this.state.talentTrees[newCareerTreeIndex]
+			for (let careerSkill in newCareerTree["careerSkills"]){
+				let skillName = newCareerTree["careerSkills"][careerSkill]
+				let skillAddIndex = skills.findIndex((value) => value["name"] == skillName)
+				if (window.data.has(this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"]))) {
+					window.data.add(this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"]), 1)
+				}
+				else {
+					throw new Error(`${this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"])} not in data`)
+				}
+			}
+		}
+
 		window.data.set(this.state.selectedCareerPath, this.state.careerNames[i])
+
 	}
 
-	handleSelectSpecialization(event, i) {
+	handleSelectSpecialization(event, i, treeId) {
 		let specializationData = this.state.specializationNames[i]
 		if (event.target.checked){
 			window.data.push(this.state.selectedSpecializationsPath, {
@@ -87,6 +122,19 @@ export class TalentsSelector extends FullViewportBox {
 			window.data.removeWithFunction(this.state.selectedSpecializationsPath, (item) => {
 				return item["name"] == specializationData.name && item["career"] == specializationData.career
 			})
+		}
+
+		let skills = window.data.get(this.state.skillsPath)
+		for (let bonusSkill in this.state.talentTrees[treeId]["bonusSkills"]){
+			let skillName = this.state.talentTrees[treeId]["bonusSkills"][bonusSkill]
+			let skillAddIndex = skills.findIndex((value) => value["name"] == skillName)
+			let currSkillIncPath = this.state.skillsPath.concat([skillAddIndex, "careerActivatorCount"])
+			if (window.data.has(currSkillIncPath)) {
+				window.data.add(currSkillIncPath, event.target.checked ? 1 : -1)
+			}
+			else {
+				throw new Error(`${currSkillIncPath} not in data`)
+			}
 		}
 	}
 
@@ -121,7 +169,7 @@ export class TalentsSelector extends FullViewportBox {
 		else {
 			for(let i = 0; i < this.state.specializationNames.length; i++){
 				let elem = React.createElement('div', {style:{position: "relative", height: "50px"},key:i},
-					React.createElement('input',{type:"checkbox", className:"width-25-percent-float-left", onChange:(event) => this.handleSelectSpecialization(event, i), checked:this.hasSpecialization(i) }),
+					React.createElement('input',{type:"checkbox", className:"width-25-percent-float-left", onChange:(event) => this.handleSelectSpecialization(event, i, this.state.specializationNames[i].index), checked:this.hasSpecialization(i) }),
 					React.createElement('span', {className:"width-25-percent-float-left"}, this.state.specializationNames[i].name),
 					React.createElement('button',{className:"width-25-percent-float-left",onClick:(event) => this.handleOpenSpecialization(this.state.specializationNames[i].index) }, "Open")
 				)
@@ -133,17 +181,17 @@ export class TalentsSelector extends FullViewportBox {
 			React.createElement('div', {className:"full-screen-semi-transparent-background"}),
 			React.createElement('div', {id:"top-level-box-big", className:"fixed-centered"},
 				React.createElement('div', {className: "height-97"},
-					React.createElement('div', {id:"careers-name", className:"left-25"}, 
+					React.createElement('div', {id:"careers-name", className:"left-20"}, 
 						React.createElement('div', {className: "full-height-container"},
 							careerNames
 						)
 					),
-					React.createElement('div', {id:"careers-name", className:"left-25"}, 
+					React.createElement('div', {id:"careers-name", className:"left-20"}, 
 						React.createElement('div', {className: "full-height-container"},
 							specializationNames
 						)
 					),
-					React.createElement('div', {id:"force-powers-tree", className:"right-75"}, 
+					React.createElement('div', {id:"force-powers-tree", className:"right-60"}, 
 						this.state.specializationSelected < 0 ? "No Tree Selected" : React.createElement(TalentTreeDataInput, {characterId: this.props.characterId, treeId: this.state.specializationSelected})
 					),
 				),
