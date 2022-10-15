@@ -51,7 +51,6 @@ export class TalentsSelector extends FullViewportBox {
 
 	handleOpenCareer(i) {
 		let specializationNames = this.state.talentTrees
-			.filter((value) => value["career"] === this.state.careerNames[i])
 			.map( (item, index) => {
 				return {
 					name: item["specialization"], 
@@ -59,6 +58,7 @@ export class TalentsSelector extends FullViewportBox {
 					index: index,
 				}
 			})
+			.filter((value) => value.career === this.state.careerNames[i])
 			.filter((value, index, self) => self.findIndex((item) => item.name == value.name) === index);
 			
 		this.setState({
@@ -168,10 +168,11 @@ export class TalentsSelector extends FullViewportBox {
 		}
 		else {
 			for(let i = 0; i < this.state.specializationNames.length; i++){
+				let index = this.state.specializationNames[i].index
 				let elem = React.createElement('div', {style:{position: "relative", height: "50px"},key:i},
-					React.createElement('input',{type:"checkbox", className:"width-25-percent-float-left", onChange:(event) => this.handleSelectSpecialization(event, i, this.state.specializationNames[i].index), checked:this.hasSpecialization(i) }),
+					React.createElement('input',{type:"checkbox", className:"width-25-percent-float-left", onChange:(event) => this.handleSelectSpecialization(event, i, index ), checked:this.hasSpecialization(i) }),
 					React.createElement('span', {className:"width-25-percent-float-left"}, this.state.specializationNames[i].name),
-					React.createElement('button',{className:"width-25-percent-float-left",onClick:(event) => this.handleOpenSpecialization(this.state.specializationNames[i].index) }, "Open")
+					React.createElement('button',{className:"width-25-percent-float-left",onClick:(event) => this.handleOpenSpecialization(index) }, "Open")
 				)
 				specializationNames.push(elem)
 			}

@@ -109,8 +109,10 @@ export class TalentTreeDataInput extends React.Component{
 			window.data.push(characterTreeDataPath, {
 				id: itemId,
 				name: item["name"],
+				ranked: item["ranked"] == true,
 				description: item["description"],
 				xpCost: item["xpCost"],
+				active: item["active"] == true,
 			})
 		}
 		else {
@@ -152,7 +154,7 @@ export class TalentTreeDataInput extends React.Component{
 					!enabled ? React.createElement('div', null, "Requirements Not Met") : null, 
 					React.createElement('div', null, item['name']),
 					React.createElement('div', null, item['xpCost']),
-					React.createElement('div', null, item['description']),
+					React.createElement('div', {className: "tree-description"}, item['description']),
 					React.createElement("input", {
 						type: "checkbox",
 						checked: active,

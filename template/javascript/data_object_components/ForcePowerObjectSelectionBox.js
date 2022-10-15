@@ -183,10 +183,10 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 			forcePowers.push(
 				React.createElement('div', {className:"col-7-grid-last-button array-box-row",key: k},
 					React.createElement('div', null,
-						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customForcePowers", i, "name"], name: "Name"}),
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customForcePowers", i, "tree"], name: "Tree"}),
 					),
 					React.createElement('div', null,
-						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customForcePowers", i, "tree"], name: "Tree"}),
+						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customForcePowers", i, "name"], name: "Name"}),
 					),
 					React.createElement('div', null,
 						React.createElement(TextDataCharacterDataInput, {characterDataPath: ["customForcePowers", i, "description"], name: "Description"}),

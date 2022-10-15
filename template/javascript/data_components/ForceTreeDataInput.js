@@ -99,6 +99,7 @@ export class ForceTreeDataInput extends React.Component{
 				id: itemId,
 				name: item["name"],
 				description: item["description"],
+				ranked: item["ranked"] == true,
 				xpCost: item["xpCost"],
 			})
 		}
@@ -141,7 +142,7 @@ export class ForceTreeDataInput extends React.Component{
 					!enabled ? React.createElement('div', null, "Requirements Not Met") : null, 
 					React.createElement('div', null, item['name']),
 					React.createElement('div', null, item['xpCost']),
-					React.createElement('div', null, item['description']),
+					React.createElement('div', {className: "tree-description"}, item['description']),
 					React.createElement("input", {
 						type: "checkbox",
 						checked: active,

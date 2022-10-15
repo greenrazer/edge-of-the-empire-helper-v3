@@ -90,10 +90,10 @@ export class SpecializationsObjectSelectionBox extends React.Component {
 			specializations.push(
 				React.createElement('div', {className:"col-2-grid array-box-row", key: i},
 					React.createElement('div', null,
-						React.createElement(TextDataCharacterDataInput, {readOnly: true, characterDataPath: this.props.characterDataPath.concat([i, "name"]), id: this.props.id + i + "-name", name: "Name"}),
+						React.createElement(TextDataCharacterDataInput, {readOnly: true, characterDataPath: this.props.characterDataPath.concat([i, "career"]), id: this.props.id + i + "-career", name: "Career"}),
 					),
 					React.createElement('div', null,
-						React.createElement(TextDataCharacterDataInput, {readOnly: true, characterDataPath: this.props.characterDataPath.concat([i, "career"]), id: this.props.id + i + "-career", name: "Career"}),
+						React.createElement(TextDataCharacterDataInput, {readOnly: true, characterDataPath: this.props.characterDataPath.concat([i, "name"]), id: this.props.id + i + "-name", name: "Name"}),
 					),
 				)
 			)

@@ -324,6 +324,13 @@ input[type=range]::-webkit-slider-thumb {
   width: 93%;  
 }
 
+.col-5-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  width: 99%;
+}
+
 .col-6-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -593,4 +600,9 @@ input[type=range]::-webkit-slider-thumb {
 
 .input-line input {
   width: 10%;
+}
+
+.tree-description {
+  height: 55%;
+  overflow-y: scroll;
 }
