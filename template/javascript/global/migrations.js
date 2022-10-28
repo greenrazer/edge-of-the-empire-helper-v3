@@ -37,7 +37,9 @@ function v1_0_1ToV1_2_0(characterId) {
 	let forcePowers = window.data.get(["characters", characterId, "forcePowers"])
 	window.data.set(["characters", characterId, "customForcePowers"], forcePowers)
 	window.data.set(["characters", characterId, "forcePowers"], {})
-	
+
+	window.data.set(["characters", characterId, "finances", "creditsUsed"], 0)
+
 	window.data.set(["characters", characterId, "meta", "version"], "1.2.0")
 }
 
