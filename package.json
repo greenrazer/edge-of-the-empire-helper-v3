@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "discord.js-selfbot-v13": "^2.6.14",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "jszip": "^3.10.1"
   },
   "config": {
     "forge": {

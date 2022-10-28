@@ -111,8 +111,8 @@ export class TalentsObjectSelectionBox extends React.Component {
 
 		for (let i in this.state.renderArray){
 			talents.push(
-				React.createElement('div', {className:(this.state.renderArray[i]["ranked"] ? "col-6-grid" : "col-5-grid") + " array-box-row",key: i},
-					React.createElement('div', null,
+				React.createElement('div', {className:(this.state.renderArray[i]["ranked"] ? "col-4-grid" : "col-5-grid") + " array-box-row",key: i},
+					!this.state.renderArray[i]["ranked"] ? React.createElement('div', null,
 						React.createElement("label", {
 							htmlFor: this.props.id + "-" + i + "-" + 'career',
 						},"Career:"),
@@ -123,8 +123,8 @@ export class TalentsObjectSelectionBox extends React.Component {
 							value: this.state.renderArray[i]["career"],
 							readOnly: true,
 						})
-					),
-					React.createElement('div', null,
+					): null,
+					!this.state.renderArray[i]["ranked"] ? React.createElement('div', null,
 						React.createElement("label", {
 							htmlFor: this.props.id + "-" + i + "-" + 'specialization',
 						},"Specialization:"),
@@ -135,7 +135,7 @@ export class TalentsObjectSelectionBox extends React.Component {
 							value: this.state.renderArray[i]["specialization"],
 							readOnly: true,
 						})
-					),
+					): null,
 					React.createElement('div', null,
 						React.createElement("label", {
 							htmlFor: this.props.id + "-" + i + "-" + 'name',

@@ -7,14 +7,30 @@ export class ForcePowersSelector extends FullViewportBox {
 
 		this.state.forcePowerTreeSelected = -1
 		this.state.forcePowerTrees = window.data.get(["forcePowerTrees"])
+		
+		window.data.addListener(["forcePowerTrees"], () => {
+			let trees = window.data.get(["forcePowerTrees"])
+		  this.setState({
+				forcePowerTrees: trees
+			})
+		})
+
 		this.state.forceRank = window.data.get(["characters", this.props.characterId, "characteristics", "forceRank", "rank"])
 
+
 		this.handleSelect = this.handleSelect.bind(this)
+		this.handleImportTrees = this.handleImportTrees.bind(this)
 	}
 
 	handleSelect(i) {
 		this.setState({
 			forcePowerTreeSelected: i
+		})
+	}
+
+	handleImportTrees() {
+		window.api.addForceTrees().then((value) => {
+			window.data.set(["forcePowerTrees"], value)
 		})
 	}
 
@@ -35,6 +51,7 @@ export class ForcePowersSelector extends FullViewportBox {
 			React.createElement('div', {id:"top-level-box-big", className:"fixed-centered"},
 				React.createElement('div', {className: "height-97"},
 					React.createElement('div', {id:"force-powers-name", className:"left-25"}, 
+						React.createElement('button', {onClick:this.handleImportTrees}, "Import Trees"),
 						React.createElement('div', {className: "full-height-container"},
 							treeNames
 						)

@@ -138,8 +138,10 @@ export class ForceTreeDataInput extends React.Component{
 					key:q++
 				},
 				React.createElement('div', {className:"width-10-percent-float-left height-80-percent-min-15px", style:{width:"calc(10% - 13px)"}}, boxStyle["left"] ? React.createElement('div', {className:active ? "vertically-activated-center-left": "vertically-center"}): null),
-				React.createElement('div', {className:"width-80-percent-float-left height-80-percent-min-15px solid-black-border padding-10"}, 
-					!enabled ? React.createElement('div', null, "Requirements Not Met") : null, 
+				React.createElement('div', {
+						className:`width-80-percent-float-left height-80-percent-min-15px solid-black-border padding-10 tree-element-${enabled ? "enabled" : "disabled"}`
+					}, 
+					!enabled ? React.createElement('div', {style: {color:"red"}}, "Requirements Not Met") : null, 
 					React.createElement('div', null, item['name']),
 					React.createElement('div', null, item['xpCost']),
 					React.createElement('div', {className: "tree-description"}, item['description']),

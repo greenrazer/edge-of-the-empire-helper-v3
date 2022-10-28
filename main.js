@@ -3,6 +3,8 @@ const {app, protocol, BrowserWindow, ipcMain, dialog} = require('electron')
 const installing = require('electron-squirrel-startup');
 const path = require('path')
 const fs = require('fs');
+const jszip = require('jszip')
+
 const APP_ROOT_PATH = app.getPath('userData')
 
 const { DiscordInterface } = require('./DiscordInterface.js')
@@ -90,11 +92,11 @@ function init(){
 				"UIType": "path"
 			},
 			"forcePowerTreesPath": {
-				"value": path.join(__dirname, "force_power_trees"),
+				"value": path.join(APP_ROOT_PATH, "force_power_trees"),
 				"UIType": "path"
 			},
 			"talentTreesPath": {
-				"value": path.join(__dirname, "talent_trees"),
+				"value": path.join(APP_ROOT_PATH, "talent_trees"),
 				"UIType": "path"
 			},
 			"characterSavedPath":{
@@ -251,6 +253,43 @@ ipcMain.handle("doesCharacterFileNameExist", (event, character) => {
 	return fs.existsSync(path.join(config["characterSavedPath"]["value"],`${character["meta"]["filename"]}.json`))
 })
 
+ipcMain.handle("addTalentTrees", async (event, character) => {
+	await chooseTreeFilePath(config["talentTreesPath"]["value"])
+
+	return getTalentTreesFromDisk()
+})
+
+ipcMain.handle("addForceTrees", async (event, character) => {
+	await chooseTreeFilePath(config["forcePowerTreesPath"]["value"])
+
+	return getForcePowerTreesFromDisk()
+})
+
+async function chooseTreeFilePath(writeFolderPath){
+	let result = chooseFilePath([
+		{ name: "json", extensions: ["json"] },
+		{ name: "zip", extensions: ["zip"] }
+	])
+
+	let file_obj = path.parse(result);
+	let extension = file_obj.ext
+	if ( extension == '.json' ) {
+		let filejson = filenameToJson(result)
+		writeJSONToDisk(path.join(writeFolderPath, file_obj.base), filejson)
+	}
+	else if ( extension == '.zip' ) {
+		const zipfilecontent = fs.readFileSync(result)
+		const zipout = await jszip.loadAsync(zipfilecontent)
+
+		for (let key of Object.keys(zipout.files)){
+			const item = zipout.files[key]
+			if (!item.dir){
+				const filepath = path.join(writeFolderPath, item.name)
+				fs.writeFileSync(filepath, Buffer.from(await item.async('arraybuffer')))
+			}
+		}
+	}
+}
 
 function chooseFilePath(filters) {
 	let result = dialog.showOpenDialogSync({

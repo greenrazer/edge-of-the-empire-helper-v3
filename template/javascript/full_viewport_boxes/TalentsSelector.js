@@ -9,12 +9,24 @@ export class TalentsSelector extends FullViewportBox {
 		this.state.specializationSelected = -1
 
 		this.state.talentTrees = window.data.get(["talentTrees"])
-
 		this.state.careerNames = this.state.talentTrees
 			.map( item => item["career"])
 			.filter((value, index, self) => {
 				return self.indexOf(value) === index;
 			});
+
+		window.data.addListener(["talentTrees"], () => {
+			let trees = window.data.get(["talentTrees"])
+			let careers = trees
+				.map( item => item["career"])
+				.filter((value, index, self) => {
+					return self.indexOf(value) === index;
+				});
+		  this.setState({
+				talentTrees: trees,
+				careerNames: careers
+			})
+		})
 
 		this.state.specializationNames = []
 
@@ -42,6 +54,7 @@ export class TalentsSelector extends FullViewportBox {
 		this.handleSelectSpecialization = this.handleSelectSpecialization.bind(this)
 		this.hasCareer = this.hasCareer.bind(this)
 		this.hasSpecialization = this.hasSpecialization.bind(this)
+		this.handleImportTrees = this.handleImportTrees.bind(this)
 	}
 
 	componentWillUnmount() {
@@ -108,6 +121,12 @@ export class TalentsSelector extends FullViewportBox {
 
 		window.data.set(this.state.selectedCareerPath, this.state.careerNames[i])
 
+	}
+
+	handleImportTrees() {
+		window.api.addTalentTrees().then((value) => {
+			window.data.set(["talentTrees"], value)
+		})
 	}
 
 	handleSelectSpecialization(event, i, treeId) {
@@ -183,6 +202,7 @@ export class TalentsSelector extends FullViewportBox {
 			React.createElement('div', {id:"top-level-box-big", className:"fixed-centered"},
 				React.createElement('div', {className: "height-97"},
 					React.createElement('div', {id:"careers-name", className:"left-20"}, 
+					React.createElement('button', {onClick:this.handleImportTrees}, "Import Trees"),
 						React.createElement('div', {className: "full-height-container"},
 							careerNames
 						)

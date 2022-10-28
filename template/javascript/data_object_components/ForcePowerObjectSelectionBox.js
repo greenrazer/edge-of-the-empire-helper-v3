@@ -112,18 +112,6 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 				React.createElement('div', {className:"col-6-grid-last-button array-box-row",key: i},
 					React.createElement('div', null,
 						React.createElement("label", {
-							htmlFor: this.props.id + "-" + i + "-" + 'name',
-						},"Name:"),
-						React.createElement("input", {
-							name: this.props.id + "-" + i + "-" + 'name',
-							id: this.props.id + "-" + i + "-" + 'name',
-							type: "text",
-							value: this.state.renderArray[i]["name"],
-							readOnly: true,
-						})
-					),
-					React.createElement('div', null,
-						React.createElement("label", {
 							htmlFor: this.props.id + "-" + i + "-" + 'tree',
 						},"Tree:"),
 						React.createElement("input", {
@@ -131,6 +119,18 @@ export class ForcePowerObjectSelectionBox extends React.Component {
 							id: this.props.id + "-" + i + "-" + 'tree',
 							type: "text",
 							value: this.state.renderArray[i]["tree"],
+							readOnly: true,
+						})
+					),
+					React.createElement('div', null,
+						React.createElement("label", {
+							htmlFor: this.props.id + "-" + i + "-" + 'name',
+						},"Name:"),
+						React.createElement("input", {
+							name: this.props.id + "-" + i + "-" + 'name',
+							id: this.props.id + "-" + i + "-" + 'name',
+							type: "text",
+							value: this.state.renderArray[i]["name"],
 							readOnly: true,
 						})
 					),
