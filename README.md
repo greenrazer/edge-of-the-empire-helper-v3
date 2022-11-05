@@ -73,6 +73,13 @@ If you want to connect the app to your discord:
 7. Paste Channel ID into the channel ID text input.
 8. Test it out by clicking 
 
+## Downloading Talent/Force Power Trees
+
+### Talent Trees
+[here](https://mega.nz/file/UK8hCAZY#z2W9pdSovm5PoES9pG8zo36qFglsxUF0b-9cSq8HakQ)
+### Force Power Trees
+[here](https://mega.nz/file/pHVxjTBA#S3nTuWh0S9sPgmV6ByC7brWXskSw-V7BWDwS5G13ouY)
+
 ## Contributers
 ![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
