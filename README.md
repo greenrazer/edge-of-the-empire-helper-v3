@@ -76,9 +76,9 @@ If you want to connect the app to your discord:
 ## Downloading Talent/Force Power Trees
 
 ### Talent Trees
-[here](https://mega.nz/file/UK8hCAZY#z2W9pdSovm5PoES9pG8zo36qFglsxUF0b-9cSq8HakQ)
+[here](https://mega.nz/file/0XkVwBjQ#VQJQYAqIj_mTVBeuBXtuQXRIJ2XjxcZ24C3sPGsu0ic)
 ### Force Power Trees
-[here](https://mega.nz/file/pHVxjTBA#S3nTuWh0S9sPgmV6ByC7brWXskSw-V7BWDwS5G13ouY)
+[here](https://mega.nz/file/IflRDLoC#dvT_uhEX5BqHVb0I-qlTt0unFYUmaZm1dI0W0x3-yrY)
 
 ## Contributers
 ![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
