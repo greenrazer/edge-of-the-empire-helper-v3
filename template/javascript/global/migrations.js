@@ -27,14 +27,30 @@ function v1_0_1ToV1_2_0(characterId) {
 	}
 
 	let specializations = window.data.get(["characters", characterId, "base", "specializations"])
+	specializations = specializations.map(spec => {
+		spec["xpCost"] = spec["cost"]
+		delete spec["cost"]
+		return spec
+	})
 	window.data.set(["characters", characterId, "base", "customSpecializations"], specializations)
 	window.data.set(["characters", characterId, "base", "specializations"], [])
 
 	let talents = window.data.get(["characters", characterId, "talents"])
+	talents = talents.map(spec => {
+		spec["xpCost"] = spec["cost"]
+		delete spec["cost"]
+		spec["career"] = ""
+		return spec
+	})
 	window.data.set(["characters", characterId, "customTalents"], talents)
 	window.data.set(["characters", characterId, "talents"], {})
 
 	let forcePowers = window.data.get(["characters", characterId, "forcePowers"])
+	forcePowers = forcePowers.map(spec => {
+		spec["xpCost"] = spec["cost"]
+		delete spec["cost"]
+		return spec
+	})
 	window.data.set(["characters", characterId, "customForcePowers"], forcePowers)
 	window.data.set(["characters", characterId, "forcePowers"], {})
 

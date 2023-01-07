@@ -121,14 +121,14 @@ export class XPCharacterDataInput extends React.Component {
 			let customSpecializations = window.data.getPathCurrentCharacter(["base", "customSpecializations"])
 
 			for (let i in customSpecializations){
-				i = curr + parseInt(i)
+				i = parseInt(i)
 				
 				let specializationCareer = customSpecializations[i]["career"]
 				if(specializationCareer == career && skip < 1){
 					skip++
 					continue
 				}
-				let specializationNum = i+1
+				let specializationNum = curr + i + 1
 				
 				let totXp = 0
 				if(specializationCareer == career) {
