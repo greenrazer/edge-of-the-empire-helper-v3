@@ -71,7 +71,10 @@ export class SkillsArrayBox extends CharacterArrayBox {
 		if (this.state.skills[i]["careerActivatorCount"] > 0){
 			return
 		}
-
+		if (event.target.checked){
+			let currRank = window.data.get(this.state.skillsDataPath.concat([i, "rank"]))
+			window.data.set(this.state.skillsDataPath.concat([i, "careerRank"]), currRank)
+		}
 		window.data.set(this.state.skillsDataPath.concat([i, "career"]), event.target.checked)
 	}
 
