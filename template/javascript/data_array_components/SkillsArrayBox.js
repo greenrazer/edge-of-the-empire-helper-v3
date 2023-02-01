@@ -86,7 +86,8 @@ export class SkillsArrayBox extends CharacterArrayBox {
 		
 		for (let i = 0; i < this.state.dataLen; i++){
 			if (this.state.showDiceRollIndex == i) {
-				let skillRank = window.data.getPathCurrentCharacter(this.props.characterDataPath.concat([i, "rank"]))
+				let skillRank = window.data.getPathCurrentCharacter(this.props.characterDataPath.concat([i, this.state.skills[i]["careerActivatorCount"] > 0 || this.state.skills[i]["career"] ? "careerRank": "rank"]))
+				
 				let characterisitc = window.data.getPathCurrentCharacter(this.props.characterDataPath.concat([i, "characteristic"]))
 				let characteristicRank = window.data.getPathCurrentCharacter(["characteristics",characterisitc,"rank"])
 				
